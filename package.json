@@ -1,0 +1,15 @@
+{
+  "name": "mediease",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "tailwind": "npx tailwindcss -i ./main/css/input.css -o ./main/build/media/css/build.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier-plugin-tailwindcss": "^0.1.13"
+  }
+}
