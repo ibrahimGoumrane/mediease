@@ -1,25 +1,27 @@
 <?php
-class Patient {
-    private $conn;
+class Patient extends Person {
     private $table_name = "Patient";
 
-    public $id;
     public $medical_history;
 
-    public function __construct($db, $medical_history = null) {
-        $this->conn = $db;
+    public function __construct($db, $last_name = null, $first_name = null, $date_birth = null, $gender = null, $phone_number = null, $email = null, $medical_history = null) {
+        parent::__construct($db, $last_name, $first_name, $date_birth, $gender, $phone_number, $email);
         $this->medical_history = $medical_history;
     }
 
     public function create() {
-        $query = "INSERT INTO " . $this->table_name . " (medical_history) VALUES (:medical_history)";
-        $stmt = $this->conn->prepare($query);
+        // First, create the person record
+        if (parent::create()) {
+            // Then, create the patient record using the newly created person's ID
+            $query = "INSERT INTO " . $this->table_name . " (id, medical_history) VALUES (:id, :medical_history)";
+            $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(":medical_history", $this->medical_history);
+            $stmt->bindParam(":id", $this->id);
+            $stmt->bindParam(":medical_history", $this->medical_history);
 
-        if ($stmt->execute()) {
-            $this->id = $this->conn->lastInsertId();
-            return true;
+            if ($stmt->execute()) {
+                return true;
+            }
         }
         return false;
     }
@@ -32,25 +34,31 @@ class Patient {
     }
 
     public function update() {
-        $query = "UPDATE " . $this->table_name . " SET medical_history=:medical_history WHERE id=:id";
-        $stmt = $this->conn->prepare($query);
+        // First, update the person record
+        if (parent::update()) {
+            // Then, update the patient record
+            $query = "UPDATE " . $this->table_name . " SET medical_history=:medical_history WHERE id=:id";
+            $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(":id", $this->id);
-        $stmt->bindParam(":medical_history", $this->medical_history);
+            $stmt->bindParam(":id", $this->id);
+            $stmt->bindParam(":medical_history", $this->medical_history);
 
-        if ($stmt->execute()) {
-            return true;
+            if ($stmt->execute()) {
+                return true;
+            }
         }
         return false;
     }
 
     public function delete() {
+        // First, delete the patient record
         $query = "DELETE FROM " . $this->table_name . " WHERE id=:id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":id", $this->id);
 
         if ($stmt->execute()) {
-            return true;
+            // Then, delete the person record
+            return parent::delete();
         }
         return false;
     }

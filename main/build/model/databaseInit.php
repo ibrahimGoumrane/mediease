@@ -96,6 +96,14 @@ try {
     }
 
     echo "Database and tables created successfully.";
+
+    function dropdb($dbname, $username, $password){
+        $pdo = new PDO('mysql:host=localhost;dbname='.$dbname, $username, $password);
+        $pdo->exec("DROP DATABASE ". $dbname );
+        echo "Database dropped successfully.";
+    }
+
+    //dropdb($dbname, $username, $password);
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }

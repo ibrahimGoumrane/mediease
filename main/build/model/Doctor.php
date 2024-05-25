@@ -1,28 +1,30 @@
 <?php
-class Doctor {
-    private $conn;
+class Doctor extends Person {
     private $table_name = "Doctor";
 
-    public $id;
     public $years_of_experience;
     public $specialization;
 
-    public function __construct($db, $years_of_experience = null, $specialization = null) {
-        $this->conn = $db;
+    public function __construct($db, $last_name = null, $first_name = null, $date_birth = null, $gender = null, $phone_number = null, $email = null, $years_of_experience = null, $specialization = null) {
+        parent::__construct($db, $last_name, $first_name, $date_birth, $gender, $phone_number, $email);
         $this->years_of_experience = $years_of_experience;
         $this->specialization = $specialization;
     }
 
     public function create() {
-        $query = "INSERT INTO " . $this->table_name . " (years_of_experience, specialization) VALUES (:years_of_experience, :specialization)";
-        $stmt = $this->conn->prepare($query);
+        // First, create the person record
+        if (parent::create()) {
+            // Then, create the doctor record using the newly created person's ID
+            $query = "INSERT INTO " . $this->table_name . " (id, years_of_experience, specialization) VALUES (:id, :years_of_experience, :specialization)";
+            $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(":years_of_experience", $this->years_of_experience);
-        $stmt->bindParam(":specialization", $this->specialization);
+            $stmt->bindParam(":id", $this->id);
+            $stmt->bindParam(":years_of_experience", $this->years_of_experience);
+            $stmt->bindParam(":specialization", $this->specialization);
 
-        if ($stmt->execute()) {
-            $this->id = $this->conn->lastInsertId();
-            return true;
+            if ($stmt->execute()) {
+                return true;
+            }
         }
         return false;
     }
@@ -35,26 +37,32 @@ class Doctor {
     }
 
     public function update() {
-        $query = "UPDATE " . $this->table_name . " SET years_of_experience=:years_of_experience, specialization=:specialization WHERE id=:id";
-        $stmt = $this->conn->prepare($query);
+        // First, update the person record
+        if (parent::update()) {
+            // Then, update the doctor record
+            $query = "UPDATE " . $this->table_name . " SET years_of_experience=:years_of_experience, specialization=:specialization WHERE id=:id";
+            $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(":id", $this->id);
-        $stmt->bindParam(":years_of_experience", $this->years_of_experience);
-        $stmt->bindParam(":specialization", $this->specialization);
+            $stmt->bindParam(":id", $this->id);
+            $stmt->bindParam(":years_of_experience", $this->years_of_experience);
+            $stmt->bindParam(":specialization", $this->specialization);
 
-        if ($stmt->execute()) {
-            return true;
+            if ($stmt->execute()) {
+                return true;
+            }
         }
         return false;
     }
 
     public function delete() {
+        // First, delete the doctor record
         $query = "DELETE FROM " . $this->table_name . " WHERE id=:id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":id", $this->id);
 
         if ($stmt->execute()) {
-            return true;
+            // Then, delete the person record
+            return parent::delete();
         }
         return false;
     }
