@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost';
 $dbname = 'medieaseDB';
-$username = 'admin';
+$username = 'root';
 $password = '';
 
 try {
