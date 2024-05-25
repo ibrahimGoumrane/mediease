@@ -10,8 +10,9 @@ abstract class Person {
     public $gender;
     public $phone_number;
     public $email;
+    public $password;
 
-    public function __construct($db, $last_name = null, $first_name = null, $date_birth = null, $gender = null, $phone_number = null, $email = null) {
+    public function __construct($db, $last_name = null, $first_name = null, $date_birth = null, $gender = null, $phone_number = null, $email = null,$password = null) {
         $this->conn = $db;
         $this->last_name = $last_name;
         $this->first_name = $first_name;
@@ -19,6 +20,8 @@ abstract class Person {
         $this->gender = $gender;
         $this->phone_number = $phone_number;
         $this->email = $email;
+        $this->password = password_hash($password, PASSWORD_DEFAULT); // Hash the password
+
     }
 
     public function create() {
@@ -31,6 +34,8 @@ abstract class Person {
         $stmt->bindParam(":gender", $this->gender);
         $stmt->bindParam(":phone_number", $this->phone_number);
         $stmt->bindParam(":email", $this->email);
+        $stmt->bindParam(":password", $this->password);
+
 
         if ($stmt->execute()) {
             $this->id = $this->conn->lastInsertId();
@@ -57,6 +62,8 @@ abstract class Person {
         $stmt->bindParam(":gender", $this->gender);
         $stmt->bindParam(":phone_number", $this->phone_number);
         $stmt->bindParam(":email", $this->email);
+        $stmt->bindParam(":password", $this->password);
+
 
         if ($stmt->execute()) {
             return true;
