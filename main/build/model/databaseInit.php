@@ -22,7 +22,8 @@ try {
             date_of_birth DATE,
             gender VARCHAR(10),
             phone_number VARCHAR(20),
-            email VARCHAR(50)
+            email VARCHAR(50),
+            password VARCHAR(50)
         )",
 
         "CREATE TABLE IF NOT EXISTS Patient (
@@ -103,7 +104,7 @@ try {
         echo "Database dropped successfully.";
     }
 
-    //dropdb($dbname, $username, $password);
+    // dropdb($dbname, $username, $password);
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }

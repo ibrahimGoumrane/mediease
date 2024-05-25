@@ -10,8 +10,9 @@ abstract class Person {
     public $gender;
     public $phone_number;
     public $email;
+    public $password;
 
-    public function __construct($db, $last_name = null, $first_name = null, $date_birth = null, $gender = null, $phone_number = null, $email = null) {
+    public function __construct($db, $last_name = null, $first_name = null, $date_birth = null, $gender = null, $phone_number = null, $email = null , $password = null) {
         $this->conn = $db;
         $this->last_name = $last_name;
         $this->first_name = $first_name;
@@ -19,10 +20,11 @@ abstract class Person {
         $this->gender = $gender;
         $this->phone_number = $phone_number;
         $this->email = $email;
+        $this->password = $password;
     }
 
     public function create() {
-        $query = "INSERT INTO " . $this->table_name . " (last_name, first_name, date_birth, gender, phone_number, email) VALUES (:last_name, :first_name, :date_birth, :gender, :phone_number, :email)";
+        $query = "INSERT INTO " . $this->table_name . " (last_name, first_name, date_birth, gender, phone_number, email ,password ) VALUES (:last_name, :first_name, :date_birth, :gender, :phone_number, :email ,:password)";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(":last_name", $this->last_name);
@@ -31,6 +33,7 @@ abstract class Person {
         $stmt->bindParam(":gender", $this->gender);
         $stmt->bindParam(":phone_number", $this->phone_number);
         $stmt->bindParam(":email", $this->email);
+        $stmt->bindParam(":password", $this->password);
 
         if ($stmt->execute()) {
             $this->id = $this->conn->lastInsertId();
@@ -47,7 +50,7 @@ abstract class Person {
     }
 
     public function update() {
-        $query = "UPDATE " . $this->table_name . " SET last_name=:last_name, first_name=:first_name, date_birth=:date_birth, gender=:gender, phone_number=:phone_number, email=:email WHERE id=:id";
+        $query = "UPDATE " . $this->table_name . " SET last_name=:last_name, first_name=:first_name, date_birth=:date_birth, gender=:gender, phone_number=:phone_number, email=:email , password=:password WHERE id=:id";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(":id", $this->id);
@@ -57,6 +60,7 @@ abstract class Person {
         $stmt->bindParam(":gender", $this->gender);
         $stmt->bindParam(":phone_number", $this->phone_number);
         $stmt->bindParam(":email", $this->email);
+        $stmt->bindParam(":password", $this->password);
 
         if ($stmt->execute()) {
             return true;

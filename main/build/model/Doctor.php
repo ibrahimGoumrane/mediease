@@ -2,11 +2,12 @@
 class Doctor extends Person {
     private $table_name = "Doctor";
 
+    public const IS_DOCTOR = true;
     public $years_of_experience;
     public $specialization;
 
-    public function __construct($db, $last_name = null, $first_name = null, $date_birth = null, $gender = null, $phone_number = null, $email = null, $years_of_experience = null, $specialization = null) {
-        parent::__construct($db, $last_name, $first_name, $date_birth, $gender, $phone_number, $email);
+    public function __construct($db, $last_name = null, $first_name = null, $date_birth = null, $gender = null, $phone_number = null, $email = null, $password=null, $years_of_experience = null, $specialization = null) {
+        parent::__construct($db, $last_name, $first_name, $date_birth, $gender, $phone_number, $email ,$password);
         $this->years_of_experience = $years_of_experience;
         $this->specialization = $specialization;
     }
