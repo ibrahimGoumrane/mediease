@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+  .activeLink {
+    @apply bg-gray-600 rounded-ss-2xl rounded-ee-2xl;
+  }
+  .section-min-height {
+    min-height: calc(100vh - 128px);
+  }
+  .gridMain {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 200px repeat(2, 150px);
+    column-gap: 50px;
+  }
+  .gridMain > * {
+    padding: 20px;
+  }
+  .gridMain img {
+    grid-row: 1 / 4;
+    grid-column: 2 / 3;
+  }
+  .gridMain h1 {
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+  }
+  .gridMain p {
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+  }
+  .gridMain form {
+    grid-row: 3 / 4;
+    grid-column: 1 / 2;
+  }
+  .buttonMain {
+    @apply hover:bg-light-black hover:rounded-full hover:text-white   duration-300 bg-light-green text-nowrap text-xl text-light-white px-7 py-5 w-fit rounded-3xl h-6 flex justify-center items-center;
+  }
+}
