@@ -22,8 +22,6 @@ try {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
-            // For debugging: output the hashed password from the database
-            // echo "Hashed password from DB: " . $user['password'] . "<br>";
             echo "Password verification result: " . (password_verify($password, $user['password']) ? 'true' : 'false');
             if (password_verify($password, $user['password'])) {
                 session_start();
