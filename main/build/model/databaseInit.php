@@ -87,7 +87,16 @@ try {
             end_time TIME,
             date DATE,
             FOREIGN KEY (doctor_id) REFERENCES Doctor(id)
-        )"
+        )",
+
+        "CREATE TABLE IF NOT EXISTS ContactUs (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(50) NOT NULL,
+            email VARCHAR(50) NOT NULL,
+            message TEXT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )",
+
     ];
     function  createTables($queries, $pdo){
         foreach ($queries as $query) {
@@ -105,8 +114,8 @@ try {
         echo "Database dropped successfully.";
     }
 
-     createTables($queries, $pdo);
-     //dropdb($dbname, $username, $password);
+    createTables($queries, $pdo);
+    // dropdb($dbname, $username, $password);
 
 
 } catch (PDOException $e) {

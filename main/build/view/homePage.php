@@ -6,7 +6,7 @@
     <title>Document</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../media/css/build.css">
-    <script defer src="../media/js/index.js"></script>
+
 </head>
 <body>
     <?php include 'components/header.php'; ?>
@@ -16,7 +16,7 @@
         </p>
         <form action="#" method="get">
             <div class="flex items-center content-center   drop-shadow-2xl my-5  ">
-                <input type="text" required placeholder="Enter your email" class=" bg-white text-black flex justify-start items-center px-10 py-5 h-6 rounded-3xl  outline-none font-mono">
+                <input type="text" required placeholder="Enter your email" class=" bg-white text-black flex justify-start items-center px-10 py-5 h-4 rounded-3xl  outline-none font-mono">
                 <button class="buttonMain relative -translate-x-7 hover:-translate-x-1 font-mono" >Sign in</button>
             </div>
             <p>⭐⭐⭐⭐⭐ based on 1,000 review from Our customers </p>
@@ -24,6 +24,7 @@
             <img class=" place-self-center  h-3/4" src="../media/img/hello.png" alt="hero" class="w-3/4 mx-auto">
     </main>
     <?php include 'components/footer.php'; ?>
+    <script defer src="../media/js/index.js"></script>
 </body>
 
 </html>
