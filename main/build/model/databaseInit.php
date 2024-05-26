@@ -17,12 +17,11 @@ try {
     $queries = [
         "CREATE TABLE IF NOT EXISTS Person (
             id INT AUTO_INCREMENT PRIMARY KEY,
-            last_name VARCHAR(50) NOT NULL,
-            first_name VARCHAR(50) NOT NULL,
+            full_name VARCHAR(50) NOT NULL,
             date_of_birth DATE,
             gender VARCHAR(10),
             phone_number VARCHAR(20),
-            email VARCHAR(50),
+            email VARCHAR(50) ,
             password VARCHAR(50)
         )",
 
@@ -99,17 +98,20 @@ try {
 
     echo "Database and tables created successfully.";
 
-    function dropdb($dbname, $username, $password){
-        $pdo = new PDO('mysql:host=localhost;dbname='.$dbname, $username, $password);
-        $pdo->exec("DROP DATABASE ". $dbname );
+    function dropdb($dbname, $username, $password)
+    {
+        $pdo = new PDO('mysql:host=localhost;dbname=' . $dbname, $username, $password);
+        $pdo->exec("DROP DATABASE " . $dbname);
         echo "Database dropped successfully.";
     }
+
     // createTables($queries, $pdo);
     // dropdb($dbname, $username, $password);
+
+
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
 
 // Close connection
 $pdo = null;
-?>

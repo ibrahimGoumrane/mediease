@@ -1,37 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Your Free Account</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <form action="register.php" method="POST">
-            <h2>Create your free account</h2>
-            <button type="button" class="google-signup">Sign up with Google</button>
-            <p>or</p>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="fullname">Full Name</label>
-                <input type="text" id="fullname" name="fullname" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-                <small>Your password must be at least 10 characters</small>
-            </div>
-            <div class="form-group">
-                <input type="checkbox" id="not-a-robot" name="not_a_robot" required>
-                <label for="not-a-robot">I'm not a robot</label>
-            </div>
-            <button type="submit">Create Free Account</button>
-            <p>By creating an account, you accept our <a href="#">terms and conditions</a></p>
-        </form>
-    </div>
-</body>
-</html>
+<?php
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "your_database_name";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Get form data
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Check if user exists
+    $stmt = $conn->prepare("SELECT * FROM Person WHERE email = ?");
+    $stmt->execute([$email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && password_verify($password, $user['password'])) {
+        session_start();
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['full_name'] = $user['full_name'];
+
+        // Check if user is a patient or doctor
+        $stmt = $conn->prepare("SELECT * FROM Patient WHERE id = ?");
+        $stmt->execute([$user['id']]);
+        $is_patient = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($is_patient) {
+            $_SESSION['user_type'] = 'patient';
+        } else {
+            $_SESSION['user_type'] = 'doctor';
+        }
+
+        echo "Login successful!";
+        // Redirect to user dashboard
+        // header("Location: dashboard.php");
+    } else {
+        echo "Invalid email or password!";
+    }
+} catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+$conn = null;
+?>

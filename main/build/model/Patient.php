@@ -5,8 +5,8 @@ class Patient extends Person {
 
     public $medical_history ;
 
-    public function __construct($db, $last_name = null, $first_name = null, $date_birth = null, $gender = null, $phone_number = null, $email = null, $password=null, $medical_history = null) {
-        parent::__construct($db, $last_name, $first_name, $date_birth, $gender, $phone_number, $email ,  $password);
+    public function __construct($db, $full_name = null, $date_birth = null, $gender = null, $phone_number = null, $email = null, $password=null, $medical_history = null) {
+        parent::__construct($db, $full_name, $date_birth, $gender, $phone_number, $email ,  $password);
         $this->medical_history = $medical_history;
     }
 
