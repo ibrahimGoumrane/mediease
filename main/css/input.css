@@ -37,6 +37,6 @@
     grid-column: 1 / 2;
   }
   .buttonMain {
-    @apply hover:bg-light-black hover:rounded-full hover:text-white   duration-300 bg-light-green text-nowrap text-xl text-light-white px-7 py-5 w-fit rounded-3xl h-6 flex justify-center items-center;
+    @apply hover:bg-light-black hover:rounded-full hover:text-white   duration-300 bg-light-green text-nowrap text-xl text-light-white px-7 py-7 w-fit rounded-3xl h-6 flex justify-center items-center;
   }
 }

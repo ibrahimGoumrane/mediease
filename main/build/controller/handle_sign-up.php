@@ -2,6 +2,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+require '../../../PHPMailer-master/src/PHPMailer.php';
+require '../../../PHPMailer-master/src/SMTP.php';
+require '../../../PHPMailer-master/src/Exception.php';
+
 $host = 'localhost';
 $dbname = 'medieaseDB';
 $username = 'root';
@@ -39,7 +43,8 @@ try {
         $stmt->execute([$person_id,$years_of_experience,$specialization]);
     }
 
-    echo "Sign up successful!";
+    header("Location: ../view/login.php?email=".$email."&pass=".$_POST['password']);
+    exit();
 } catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
