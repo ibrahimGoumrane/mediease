@@ -54,7 +54,7 @@ function footerComponent() {
                                     <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/privacy?ref=njs-profile">Privacy Policy</a>
                                 </li>
                                 <li>
-                                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/contact-us?ref=njs-profile">Contact Us</a>
+                                    <a class="text-blueGray-600 hover:text-blueGray-800  bg-transparent font-semibold block pb-2 text-sm" href="https://creative-tim.com/contact-us?ref=njs-profile">Contact Us</a>
                                 </li>
                             </ul>
                         </div>
@@ -71,7 +71,8 @@ function footerComponent() {
                 </div>
             </div>
         </div>
-    </footer>';
+    </footer>
+    ';
 }
 footerComponent();
 ?>

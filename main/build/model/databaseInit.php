@@ -87,7 +87,9 @@ try {
             end_time TIME,
             date DATE,
             FOREIGN KEY (doctor_id) REFERENCES Doctor(id)
-        )"
+        )",
+
+
     ];
     function  createTables($queries, $pdo){
         foreach ($queries as $query) {
