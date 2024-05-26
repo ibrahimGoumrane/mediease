@@ -29,7 +29,7 @@ try {
                 session_start();
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['full_name'] = $user['full_name'];
-
+                $_SESSION['is_signed_in']=true;
                 // Check if user is a patient
                 $stmt = $conn->prepare("SELECT * FROM Patient WHERE id = ?");
                 $stmt->execute([$user['id']]);
