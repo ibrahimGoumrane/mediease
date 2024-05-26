@@ -90,11 +90,14 @@ try {
         )",
 
         "CREATE TABLE IF NOT EXISTS ContactUs (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(50) NOT NULL,
-            email VARCHAR(50) NOT NULL,
-            message TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(50) NOT NULL,
+        email VARCHAR(50) NOT NULL,
+        phone_number VARCHAR(20),
+        message TEXT,
+        treated BOOLEAN DEFAULT FALSE,
+        User_mail VARCHAR(50) NOT NULL DEFAULT 'adminadmin@gmail.com',
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )",
 
     ];
@@ -102,10 +105,11 @@ try {
         foreach ($queries as $query) {
             $pdo->exec($query);
         }
+        echo "Database and tables created successfully.";
     }
 
 
-    echo "Database and tables created successfully.";
+
 
     function dropdb($dbname, $username, $password)
     {

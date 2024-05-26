@@ -1,6 +1,8 @@
-<?php 
-function headerComponent(){
-    echo '
+<?php ?>
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../media/css/build.css">
+</head>
     <header class="flex justify-center items-start h-32 w-full gap-1 mx-auto px-5 flex-col bg-light-white mb-14">
     <div class="w-full flex justify-between items-center my-4 mb-1 font-serif text-base gap-44 px-10">
         <div class="w-2/4 flex justify-between items-center h-full font-serif text-base gap-20">
@@ -31,8 +33,4 @@ function headerComponent(){
             <li class="hover:bg-transparent hover:duration-300 h-10 w-20 flex items-center justify-center"><a class="hover:duration-300 p-2 hover:border-b hover:border-b-slate-400 hover:-translate-y-0.5 text-nowrap" href="#">Free Lancers</a></li>
         </ul>
     </div>
-</header>';
-
-}
-headerComponent();
-?>
+</header>

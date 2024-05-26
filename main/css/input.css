@@ -8,6 +8,9 @@
   .section-min-height {
     min-height: calc(100vh - 128px);
   }
+  .support-height {
+    height: calc(100vh - 184px);
+  }
   .gridMain {
     display: grid;
     grid-template-columns: 1fr 1fr;

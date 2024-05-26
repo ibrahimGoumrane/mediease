@@ -1,12 +1,14 @@
 
-<?php 
-function footerComponent() {
-    echo '
+<?php ?>
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../media/css/build.css">
+</head>
     <footer class="relative bg-blueGray-200 pt-8 pb-6">
         <div class="container mx-auto px-4">
             <div class="flex flex-wrap text-left lg:text-left">
                 <div class="w-full lg:w-6/12 px-4">
-                    <h4 class="text-3xl font-semibold text-blueGray-700">Let\'s keep in touch!</h4>
+                    <h4 class="text-3xl font-semibold text-blueGray-700">Let's keep in touch!</h4>
                     <h5 class="text-lg mt-0 mb-2 text-blueGray-600">
                         Find us on any of these platforms, we respond 1-2 business days.
                     </h5>
@@ -72,7 +74,3 @@ function footerComponent() {
             </div>
         </div>
     </footer>
-    ';
-}
-footerComponent();
-?>
