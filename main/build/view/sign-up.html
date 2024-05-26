@@ -12,7 +12,7 @@
           <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
           MediEase    
       </a>
-      <div class="w-full bg-whiterounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+      <div class="w-1/2 bg-whiterounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Create an account
@@ -35,27 +35,57 @@
                     </div>
                     <div>
                     <label for="phone_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number:</label>
-                    <input type="text" id="phone_number" name="phone_number"class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" required="" />
+                    <input type="number" id="phone_number" name="phone_number"class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder ="06xxxxxxxx" required="" />
                 </div>
                 <div>
                     <label for="user_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">I am a:</label>
                     <select id="user_type" name="user_type" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" required="">
-                      <option value="patient">Patient</option>
+                        <option value="none" selected > </option>
+                        <option value="patient">Patient</option>
                       <option value="doctor">Doctor</option></select>
                 </div>
                 <div id="years_of_experience_field" style="display: none;">
                     <label for="years_of_experience" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Years of Experience:</label>
-                    <input type="text" id="years_of_experience" name="years_of_experience" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Years of Experience" required="">
+                    <input type="number" id="years_of_experience" name="years_of_experience" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Years of Experience" required="">
                 </div>
-                
+                <div id="specialization" style="display: none;">
+                    <label for="specialization" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Specialization:</label>
+                    <select id="specialization" name="specialization" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" required="">
+                        <option value="">Select specialization</option>
+                        <option value="cardiology">Cardiology</option>
+                        <option value="dermatology">Dermatology</option>
+                        <option value="endocrinology">Endocrinology</option>
+                        <option value="gastroenterology">Gastroenterology</option>
+                        <option value="dentistry">Dentistry</option>
+                        <option value="orthopedics">Orthopedics</option>
+                        <option value="pediatrics">Pediatrics</option>
+                        <option value="neurology">Neurology</option>
+                        <option value="oncology">Oncology</option>
+                        <option value="ophthalmology">Ophthalmology</option>
+                        <option value="otolaryngology">Otolaryngology (ENT)</option>
+                        <option value="psychiatry">Psychiatry</option>
+                        <option value="radiology">Radiology</option>
+                        <option value="surgery">Surgery</option>
+                    </select>
+                </div>
+                <div id="medical_history_field" style="display: none;">
+                    <label for="medical_history" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Medical History:</label>
+                    <textarea id="medical_history" name="medical_history" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 h-40 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Enter medical history here" required=""></textarea>
+                </div>
                 <script>
                     document.getElementById('user_type').addEventListener('change', function() {
                         var userType = this.value;
                         var yearsOfExperienceField = document.getElementById('years_of_experience_field');
+                        var specializationField = document.getElementById('specialization');
+                        var medicalHistoryField = document.getElementById('medical_history_field');
                         if (userType === 'doctor') {
                             yearsOfExperienceField.style.display = 'block';
+                            specializationField.style.display = 'block';
+                            medicalHistoryField.style.display = 'none';
                         } else {
                             yearsOfExperienceField.style.display = 'none';
+                            specializationField.style.display = 'none';
+                            medicalHistoryField.style.display = 'block';
                         }
                     });
                 </script>
