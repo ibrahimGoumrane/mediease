@@ -90,11 +90,12 @@ try {
             FOREIGN KEY (doctor_id) REFERENCES Doctor(id)
         )"
     ];
-
-    // Execute each query
-    foreach ($queries as $query) {
-        $pdo->exec($query);
+    function  createTables($queries, $pdo){
+        foreach ($queries as $query) {
+            $pdo->exec($query);
+        }
     }
+
 
     echo "Database and tables created successfully.";
 
@@ -103,7 +104,7 @@ try {
         $pdo->exec("DROP DATABASE ". $dbname );
         echo "Database dropped successfully.";
     }
-
+    // createTables($queries, $pdo);
     // dropdb($dbname, $username, $password);
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
