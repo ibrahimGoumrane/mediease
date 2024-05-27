@@ -54,7 +54,7 @@
                 <div id="specialization" style="display: none;">
                     <label for="specialization" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Specialization:</label>
                     <select id="specialization" name="specialization" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" >
-                        <option value="">Select specialization</option>
+                        <option value="" disabled selected>Select a specialty</option>
                         <option value="cardiology">Cardiology</option>
                         <option value="dermatology">Dermatology</option>
                         <option value="endocrinology">Endocrinology</option>
