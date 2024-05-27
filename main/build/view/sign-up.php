@@ -77,10 +77,10 @@
                 </div>
                 <script>
                     document.getElementById('user_type').addEventListener('change', function() {
-                        var userType = this.value;
-                        var yearsOfExperienceField = document.getElementById('years_of_experience_field');
-                        var specializationField = document.getElementById('specialization');
-                        var medicalHistoryField = document.getElementById('medical_history_field');
+                        let userType = this.value;
+                        let yearsOfExperienceField = document.getElementById('years_of_experience_field');
+                        let specializationField = document.getElementById('specialization');
+                        let medicalHistoryField = document.getElementById('medical_history_field');
                         if (userType === 'doctor') {
                             yearsOfExperienceField.style.display = 'block';
                             specializationField.style.display = 'block';
@@ -126,8 +126,8 @@
 
     <script>
     function validateForm() {
-        var password = document.getElementById("password").value;
-        var confirmPassword = document.getElementById("confirm-password").value;
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirm-password").value;
         if (password != confirmPassword) {
             alert("Passwords do not match");
             return false;
