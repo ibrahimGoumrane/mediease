@@ -12,7 +12,6 @@ class Doctor extends Person {
         $this->years_of_experience = $years_of_experience;
         $this->specialization = $specialization;
     }
-
     public function create() {
         // First, create the person record
         if (parent::create()) {
@@ -32,7 +31,7 @@ class Doctor extends Person {
     }
 
     public function read() {
-        $query = "SELECT * FROM " . $this->table_name;
+        $query = "SELECT * FROM person, doctor WHERE person.id = doctor.id ;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
