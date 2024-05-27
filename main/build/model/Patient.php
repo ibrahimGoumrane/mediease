@@ -1,16 +1,18 @@
 <?php
+require_once 'Person.php';
 class Patient extends Person {
-    private $table_name = "Patient";
+    protected $table_name = "Patient";
     public const IS_DOCTOR = false;
 
     public $medical_history ;
 
-    public function __construct($db, $full_name = null, $date_birth = null, $gender = null, $phone_number = null, $email = null, $password=null, $medical_history = null) {
-        parent::__construct($db, $full_name, $date_birth, $gender, $phone_number, $email ,  $password);
+    public function __construct($full_name = null, $date_birth = null, $gender = null, $phone_number = null, $email = null, $password=null, $medical_history = null) {
+        parent::__construct($full_name, $date_birth, $gender, $phone_number, $email ,  $password);
         $this->medical_history = $medical_history;
     }
 
     public function create() {
+
         // First, create the person record
         if (parent::create()) {
             // Then, create the patient record using the newly created person's ID
