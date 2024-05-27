@@ -57,7 +57,13 @@ module.exports = {
             },
             animation: {
                 'bounce-items': 'bounce-items 0.5s ease-in-out forwards infinite',
-            }
+            },
+            gridTemplateColumns: {
+                'profile': '60% 30%',
+            },
+            gridTemplateRows: {
+                'profile': '60% 20%',
+            },
         }
     },
     plugins: [

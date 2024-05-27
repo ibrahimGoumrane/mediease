@@ -39,4 +39,18 @@
   .buttonMain {
     @apply hover:bg-light-black hover:rounded-full hover:text-white   duration-300 bg-light-green text-nowrap text-xl text-light-white px-7 py-5 w-fit rounded-3xl h-5 flex justify-center items-center;
   }
+  .buttonCancel {
+    @apply hover:bg-light-black hover:rounded-full hover:text-white   duration-300 bg-orange-700 text-nowrap text-xl text-light-white px-7 py-5 w-fit rounded-3xl h-5 flex justify-center items-center;
+  }
+  .date:after {
+    content: "";
+    position: absolute;
+    border-top: 1px solid #e2e8f0;
+    top: 12px;
+    width: 150px;
+  }
+
+  .date:after {
+    margin-left: 15px;
+  }
 }
