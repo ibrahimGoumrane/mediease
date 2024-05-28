@@ -13,7 +13,7 @@
                 </p>
             </div>
             <ul class="font-light flex items-center w-3/4 text-slate-400 gap-8 font-serif list-none">
-                <li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/homepage_loggedIn.php">Find a Doctor</a></li>
+                <li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/homepage_loggedIn.php" >Find a Doctor</a></li>
                 <li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/view_patient_reservations.php">My Reservations</a></li>
                 <li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="#contact-us">Contact Us</a></li>
                 
@@ -45,7 +45,7 @@
                         <p class="font-2xl text-gray-500 font-bold  rounded-xl  ">Profile</p>
                     </button>
                     <div id="profile" class="absolute top-30 z-50 right-12 ">
-                    <section style="font-family: Montserrat" class=" bg-[#071e34] flex font-medium items-center justify-center  rounded-2xl">
+                    <!-- <section style="font-family: Montserrat" class=" bg-[#071e34] flex font-medium items-center justify-center  rounded-2xl">
                         <section class="w-fit  mx-auto  bg-[#071e34] rounded-2xl px-8 py-6 shadow-lg p-5 flex items-center justify-start flex-col gap-2">
                             <div class="relative w-full">
                                 <span class="absolute -top-3 -right-4 hover:cursor-pointer  bg-white text-black text-2xl font-bold p-3 rounded-full h-10  w-10 flex items-center justify-center">X</span>
@@ -67,7 +67,7 @@
                                     <button class="text-nowrap bg-orange-600 text-white font-semibold text-sm px-4 py-2 rounded-lg border border-[#071e34] hover:bg-[#071e34] hover:border-[#071e34] hover:text-white">Log out</button>
                                 </div>  
                             </div>
-                        </section>
+                        </section> -->
                     </section>
                     </div>
                 </div>
