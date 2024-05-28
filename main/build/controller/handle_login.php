@@ -24,8 +24,12 @@ try {
         echo "Password verification result: " . (password_verify($password, $user['password']) ? 'true' : 'false');
         if (password_verify($password, $user['password'])) {
             session_start();
-            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['id'] = $user['id'];
             $_SESSION['full_name'] = $user['full_name'];
+            $_SESSION['date_of_birth'] = $user['date_of_birth'];
+            $_SESSION['gender'] = $user['gender'];
+            $_SESSION['phone_number'] = $user['phone_number'];
+            $_SESSION['email'] = $user['email'];
             $_SESSION['is_signed_in']=true;
             // Check if user is a patient
             $stmt = $conn->prepare("SELECT * FROM Patient WHERE id = ?");
@@ -33,7 +37,8 @@ try {
             $is_patient = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($is_patient) {
-                $_SESSION['user_type'] = 'patient';
+                $_SESSION['user_type'] = $user['email'];
+                $_SESSION['medical_history'] = $is_patient['medical_history'];
             } else {
                 // Check if user is a doctor
                 $stmt = $conn->prepare("SELECT * FROM Doctor WHERE id = ?");
@@ -48,7 +53,7 @@ try {
             }
 
             // Redirect to user dashboard
-            header("Location: ../view/homePage.php");
+            header("Location: ../view/profil_patient.php");
             exit();
 
             

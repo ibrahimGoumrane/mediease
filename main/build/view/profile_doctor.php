@@ -14,7 +14,9 @@ $_SESSION['years_of_experience'] = '30';
 $_SESSION['specialization'] = 'Dentiste';
 $_SESSION['location'] = 'casablanca morocco';
 $_SESSION['Bio']='An  of considerable range, Jenna the name taken by Melbourne-raised, Brooklyn-based Nick Murphy writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.';
-
+if($_SESSION['user_type'] = 'doctor'){
+  
+}
 ?>
 
 <!DOCTYPE html>
@@ -31,19 +33,17 @@ $_SESSION['Bio']='An  of considerable range, Jenna the name taken by Melbourne-r
 
 <body>
   <?php include_once './components/header.php' ;?>
-<main class="flex justify-center items-start gap-10 p-20">
+<main class="flex justify-center items-start gap-10 p-20 bg-gradient-to-t from-green-300 via-green-100 to-green-50">
 <div class="profile-page w-2/3 " id="profile">
   <section class="relative block h-500-px">
-    <div class="absolute top-0 w-full h-full bg-center bg-cover" style="
-            background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80');
-          ">
+    <div class="absolute top-0 w-full h-full bg-center bg-cover" style="background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80');">
       <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black"></span>
     </div>
-    <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px" style="transform: translateZ(0px)">
+    <!--<div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px" style="transform: translateZ(0px)">
       <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
         <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
       </svg>
-    </div>
+    </div> -->
   </section>
   <section class="relative py-16">
     <div class="container mx-auto px-4">
