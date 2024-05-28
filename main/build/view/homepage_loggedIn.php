@@ -120,6 +120,6 @@
             ?>
     </main>
     <?php include './components/footer.php';?>
-    <script src="../media/js/index.js"></script>
+    <!-- <script src="../media/js/index.js"></script> -->
 </body>
 </html>
