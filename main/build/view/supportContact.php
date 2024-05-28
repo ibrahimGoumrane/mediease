@@ -96,6 +96,5 @@
             </form>
         </div>
     </main>
-    <script  src="../media/js/index.js"></script>
 </body>
 </html>

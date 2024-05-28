@@ -7,8 +7,8 @@ if (session_status() == PHP_SESSION_NONE) {
 // header("Location: login.php"); // Redirect to login page after logout
 // exit();
 
-$_SESSION['is_signed_in'] = true;
-$_SESSION['is_doctor'] = true;
+// $_SESSION['is_signed_in'] = true;
+// $_SESSION['is_doctor'] = true;
 
 ?>
 
