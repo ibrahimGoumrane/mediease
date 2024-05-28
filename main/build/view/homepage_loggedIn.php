@@ -11,7 +11,7 @@
 </head>
 <body class="bg-gradient-to-t from-green-300 via-green-100 to-green-50">
     <?php include 'components/header.php'; ?>
-    <main class="flex flex-col items-center min-h-screen text-center">
+    <main class="flex flex-col items-center min-h-screen text-center ">
         <h1 class="text-5xl font-extrabold mb-8">Find a Doctor</h1>
         <p class="text-xl font-light mb-12 max-w-md">Choose a specialty to find the right doctor for you.</p>
         <form action="" method="post" class="flex flex-col items-center gap-6 ">

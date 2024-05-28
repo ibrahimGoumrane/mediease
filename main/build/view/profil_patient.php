@@ -30,6 +30,14 @@ elseif(strcasecmp($_SESSION['user_type'], 'patient')){
 print_r($_SESSION);
 echo $_SESSION['phone_number'];
 $_SESSION['location']= "Casablanca, Morocco";
+if (isset($_POST['DeleteButton'])) {
+    if(Person::delete($_SESSION['id'])){
+      session_unset();
+      session_destroy();
+      header('Location: login.php');
+      exit;
+    }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +54,7 @@ $_SESSION['location']= "Casablanca, Morocco";
 
 <body>
   <?php include_once './components/header.php' ;?>
-<main class="flex justify-center items-start gap-10 p-20 bg-gradient-to-t from-green-300 via-green-100 to-green-50">
+<main class="flex justify-center items-start gap-10 p-20 bg-gradient-to-t from-green-300 via-green-100 to-green-50 shadow-2xl shadow-green-50">
 <div class="profile-page w-2/3 " id="profile">
   <section class="relative block h-500-px">
     <div class="absolute top-0 w-full h-full bg-center bg-cover" style="background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80');">
