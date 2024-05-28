@@ -1,3 +1,28 @@
+<?php 
+
+session_start();
+if (isset($_POST['DeleteButton'])) {
+  include_once '../model/person.php';
+  if(Person::delete($_SESSION['id'])){
+    session_unset();
+    session_destroy();
+    header('Location: login.php');
+    exit;
+  }
+  }
+$_SESSION['full_name'] = 'Dr. John Doe';
+$_SESSION['id'] = 2;
+$_SESSION['phone'] = '1254';
+$_SESSION['date_of_birth'] = '1977-05-27';
+$_SESSION['gender'] = 'male';
+$_SESSION['email'] = 'ibrahim@gmail.com';
+$_SESSION['years_of_experience'] = '30';
+$_SESSION['specialization'] = 'Dentiste';
+$_SESSION['location'] = 'casablanca morocco';
+$_SESSION['Bio']='An  of considerable range, Jenna the name taken by Melbourne-raised, Brooklyn-based Nick Murphy writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,24 +31,33 @@
     <title>Profile</title>
     <link rel="stylesheet" href="../media/css/build.css">
     <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
-<link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
-
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
+
 <body>
   <?php include_once '../model/schedule.php' ;
-  $id_schedule = 1;
+
+
   $doctor_id = 1;
-  $start_time = '14:00:00';
-  $end_time = '18:00:00';
-  $startDay= 'Monday';
-  $endDay = 'Friday';
-  
-  $schedule = new Schedule($id_schedule, $doctor_id, $start_time, $end_time, $startDay ,$endDay);
-  $availability = $schedule->getAvailability();
-  $startDay = $schedule->startDay;
-  $endDay =$schedule->endDay;
+  $schedule = new Schedule($doctor_id);
+  $info = $schedule->read($doctor_id);
+  $noSchedule = false;
+  if ($info == null){
+  $noSchedule = true;
+
+  }
+  else{
+    $schedule->start_time = $info['start_time'];
+    $schedule->end_time = $info['end_time'];
+    $availability = $schedule->getAvailability();
+    $startDay = $info['startDay'];
+    $endDay =$info['endDay'];
+  }
   ?>
-<?php include_once 'components/header.php'; ?>
+
+  <?php include_once 'components/header.php'; ?>
+
 <main class="flex justify-center items-start gap-10 p-20">
 <div class="profile-page w-2/3 " id="profile">
   <section class="relative block h-500-px">
@@ -51,38 +85,62 @@
             </div>
             <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
               <div class="py-6 px-3 mt-32 sm:mt-0">
-                <button class="buttonMain translate-x-20" type="button">
-                  Connect
-                </button>
+                <div class="group relative">
+                  <form action="" method="POST">
+
+                    <button class=" flex items-center justify-center  border-2 p-3 font-bold font-mono text-white hover:bg-white hover:text-red-500 rounded-3xl bg-red-500 hover:-translate-y-1 duration-300" type="submit" name="DeleteButton" >
+                      Delete Account
+                    </button>
+                    <div class="hidden group-hover:flex absolute -left-12  text-center  shadow hover:duration-300  items-center justify-center  border-2 p-3 font-bold font-mono text-white hover: rounded-3xl bg-black ">
+                      Clicking on this button ur hole account will be deleted
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
             <div class="w-full lg:w-4/12 px-4 lg:order-1">
             </div>
           </div>
           <div class="text-center mt-12">
-            <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
-              Jenna Stones
+            <h3 class="text-xl font-semibold leading-normal inline-block text-blueGray-700 mb-2">
+              <?php echo $_SESSION['full_name']; ?>
             </h3>
             <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
+              <i class='bx bxs-phone mr-2 text-lg text-blueGray-400' ></i>
+              <h3 class="text-xl font-semibold leading-normal inline-block text-blueGray-700 mb-2">
+                <?php echo $_SESSION['phone']; ?> 
+              </h3> 
+            </div>
+            <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
+              <i class='bx bx-envelope mr-2 text-lg text-blueGray-400' ></i>
+              <h3 class="text-xl font-semibold leading-normal inline-block text-blueGray-700 mb-2">
+                <?php echo $_SESSION['email']; ?>
+              </h3>
+            </div>
+            <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
               <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-              Casablanca, Morocco
+              <h3 class="text-xl font-semibold leading-normal inline-block text-blueGray-700 mb-2">
+              <?php echo $_SESSION['location']; ?> 
+              </h3>
             </div>
             <div class="mb-2 text-blueGray-600 mt-10">
-              <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i> Dentiste 
+              <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i> 
+              <h3 class="text-xl font-semibold leading-normal inline-block text-blueGray-700 mb-2">
+              <?php echo $_SESSION['specialization']; ?> 
+              </h3>
             </div>
             <div class="mb-2 text-blueGray-600">
-              <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i> + 10 Years of experience in medicine
+              <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i> 
+              <h3 class="text-xl font-semibold leading-normal inline-block text-blueGray-700 mb-2">
+              <?php echo $_SESSION['years_of_experience']  ; ?>   years of experience
+              </h3>
             </div>
           </div>
           <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
             <div class="flex flex-wrap justify-center">
               <div class="w-full lg:w-9/12 px-4">
                 <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
-                  An artist of considerable range, Jenna the name taken by
-                  Melbourne-raised, Brooklyn-based Nick Murphy writes,
-                  performs and records all of his own music, giving it a
-                  warm, intimate feel with a solid groove structure. An
-                  artist of considerable range.
+                <?php echo $_SESSION['Bio']; ?>
                 </p>
               </div>
             </div>
@@ -93,53 +151,69 @@
   </section>
 </div>
 <div id="actions "  class="relative ">
+  <?php if($noSchedule): ?>
+  <div class="flex flex-col items-center justify-center gap-10">
+    <h2 class=" text-left font-extrabold text-2xl text-gray-700 mb-6"></h2>
+  <?php else: ?>    
   <h2 class=" text-left font-extrabold text-2xl text-gray-700 mb-6">Doctor available :  <?php echo $startDay . '-' . $endDay.' <br> from : '.$availability; ?></h2>
+  <?php endif; ?>
   <div class="flex flex-col items-start justify-center gap-10 " id="schedule"> 
   <?php
-
   include_once '../model/reservation.php';
   $reservation = new Reservation();
-  $doctor_id = 1;
+  $doctor_id= 1;
   $reservations = $reservation->getAllReservation($doctor_id);
-  foreach ($reservations as $reservation): ?>
-    <?php
-    $visitDate = new DateTime($reservation['visit_date']);
-    $dayOfWeek = $visitDate->format('l'); // e.g., 'Monday'
-    $day = $visitDate->format('d');
-    $month = $visitDate->format('F'); // e.g., 'January'
-    $year = $visitDate->format('Y');
-    $startTime = $visitDate->format('H:i');
-    
-    // Calculate the end time by adding 2 hours to the start time
-    $endDate = clone $visitDate;
-    $endDate->modify('+2 hours');
-    $endTime = $endDate->format('H:i');
-    ?>
-    <div class="w-full bg-indigo-200 rounded-xl p-6 overflow-auto" id="Todo">
-        <h3 class="text-left font-bold text-xl text-gray-700">Reservation <?= $reservation['idReservation']; ?>:</h3>
-        <div class="w-full flex flex-col justify-evenly gap-2">
-          <p class="flex mb-4 border-b-2 border-b-indigo-400 mt-4 font-mono font-bold"><?= $dayOfWeek; ?> <span class="ml-auto"><?= $day . ' ' . $month . ' ' . $year; ?></span></p>
-          <p class="flex mb-4 border-b-2 border-b-indigo-400 font-mono font-bold">from <span class="ml-auto"><?= $startTime; ?></span></p>
-          <p class="flex mb-4 border-b-2 border-b-indigo-400 font-mono font-bold">to <span class="ml-auto"><?= $endTime; ?></span></p>
+  if (empty($reservations)) {
+    echo '<p class="text-center text-gray-700">No reservations found.</p>';
+    exit;
+  }
+    foreach ($reservations as $reservation): ?>
+      <?php
+      $visitDate = new DateTime($reservation['visit_date']);
+      $dayOfWeek = $visitDate->format('l'); // e.g., 'Monday'
+      $day = $visitDate->format('d');
+      $month = $visitDate->format('F'); // e.g., 'January'
+      $year = $visitDate->format('Y');
+      $startTime = $visitDate->format('H:i');
+
+      $currentUnixTime = time();
+      $visitDateUnix = $visitDate->format('U');
+
+      if ($visitDateUnix > $currentUnixTime) {
+        echo '<p class="text-center text-gray-700 text-3xl font-body font-bold">No reservations found.</p>';
+        continue;
+      }    
+      // Calculate the end time by adding 2 hours to the start time
+      $endDate = clone $visitDate;
+      $endDate->modify('+2 hours');
+      $endTime = $endDate->format('H:i');
+      ?>
+      <div class="w-full bg-indigo-200 rounded-xl p-6 overflow-auto" id="Todo">
+          <h3 class="text-left font-bold text-xl text-gray-700">Reservation <?= $reservation['idReservation']; ?>:</h3>
+          <div class="w-full flex flex-col justify-evenly gap-2">
+            <p class="flex mb-4 border-b-2 border-b-indigo-400 mt-4 font-mono font-bold"><?= $dayOfWeek; ?> <span class="ml-auto"><?= $day . ' ' . $month . ' ' . $year; ?></span></p>
+            <p class="flex mb-4 border-b-2 border-b-indigo-400 font-mono font-bold">from <span class="ml-auto"><?= $startTime; ?></span></p>
+            <p class="flex mb-4 border-b-2 border-b-indigo-400 font-mono font-bold">to <span class="ml-auto"><?= $endTime; ?></span></p>
+          </div>
+        <div class="flex items-center gap-10 justify-center">
+        <button class="mt-5 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+              View Details
+          </button>
+          <button class="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+              Cancel Appointment
+          </button>
         </div>
-      <div class="flex items-center gap-10 justify-center">
-      <button class="mt-5 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-            View Details
-        </button>
-        <button class="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-            Cancel Appointment
-        </button>
       </div>
-    </div>
-<?php endforeach; ?>
+  <?php endforeach; ?>
   </div>
-    <div id="patientLog"></div>
+ 
 </div>
 </main>
+<?php include_once 'components/footer.php'; ?>
 
 
 
-<?php include 'components/footer.php'; ?>
+
 </body>
 </html>
 

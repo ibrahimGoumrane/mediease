@@ -21,23 +21,23 @@ try {
             date_of_birth DATE,
             gender VARCHAR(10),
             phone_number VARCHAR(20),
-            email VARCHAR(50) ,
+            email VARCHAR(50),
             password VARCHAR(200)
         )",
-
+    
         "CREATE TABLE IF NOT EXISTS Patient (
             id INT PRIMARY KEY,
             medical_history TEXT,
-            FOREIGN KEY (id) REFERENCES Person(id)
+            FOREIGN KEY (id) REFERENCES Person(id) ON DELETE CASCADE
         )",
-
+    
         "CREATE TABLE IF NOT EXISTS Doctor (
             id INT PRIMARY KEY,
             years_of_experience INT,
             specialization VARCHAR(100),
-            FOREIGN KEY (id) REFERENCES Person(id)
+            FOREIGN KEY (id) REFERENCES Person(id) ON DELETE CASCADE
         )",
-
+    
         "CREATE TABLE IF NOT EXISTS Reservation (
             idReservation INT AUTO_INCREMENT PRIMARY KEY,
             patient_id INT,
@@ -45,10 +45,10 @@ try {
             status VARCHAR(20),
             notes TEXT,
             visit_date DATETIME,
-            FOREIGN KEY (patient_id) REFERENCES Patient(id),
-            FOREIGN KEY (doctor_id) REFERENCES Doctor(id)
+            FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE,
+            FOREIGN KEY (doctor_id) REFERENCES Doctor(id) ON DELETE CASCADE
         )",
-
+    
         "CREATE TABLE IF NOT EXISTS MedicalRecords (
             idMedicalRecord INT AUTO_INCREMENT PRIMARY KEY,
             patient_id INT,
@@ -57,10 +57,10 @@ try {
             visit_date DATETIME,
             treatment TEXT,
             notes TEXT,
-            FOREIGN KEY (patient_id) REFERENCES Patient(id),
-            FOREIGN KEY (doctor_id) REFERENCES Doctor(id)
+            FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE,
+            FOREIGN KEY (doctor_id) REFERENCES Doctor(id) ON DELETE CASCADE
         )",
-
+    
         "CREATE TABLE IF NOT EXISTS Payment (
             id INT AUTO_INCREMENT PRIMARY KEY,
             patient_id INT,
@@ -68,9 +68,9 @@ try {
             payment_date DATETIME,
             payment_method VARCHAR(20),
             status VARCHAR(20),
-            FOREIGN KEY (patient_id) REFERENCES Patient(id)
+            FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
         )",
-
+    
         "CREATE TABLE IF NOT EXISTS MedicalSupply (
             id INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(40),
@@ -79,7 +79,7 @@ try {
             purchase_date DATE,
             expire_date DATE
         )",
-
+    
         "CREATE TABLE IF NOT EXISTS Schedule (
             id_schedule INT AUTO_INCREMENT PRIMARY KEY,
             doctor_id INT,
@@ -87,21 +87,21 @@ try {
             end_time TIME,
             startDay VARCHAR(40),
             endDay VARCHAR(40),
-            FOREIGN KEY (doctor_id) REFERENCES Doctor(id)
+            FOREIGN KEY (doctor_id) REFERENCES Doctor(id) ON DELETE CASCADE
         )",
-
+    
         "CREATE TABLE IF NOT EXISTS ContactUs (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(50) NOT NULL,
-        email VARCHAR(50) NOT NULL,
-        phone_number VARCHAR(20),
-        message TEXT,
-        treated BOOLEAN DEFAULT FALSE,
-        User_mail VARCHAR(50) NOT NULL DEFAULT 'adminadmin@gmail.com',
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(50) NOT NULL,
+            email VARCHAR(50) NOT NULL,
+            phone_number VARCHAR(20),
+            message TEXT,
+            treated BOOLEAN DEFAULT FALSE,
+            User_mail VARCHAR(50) NOT NULL DEFAULT 'adminadmin@gmail.com',
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )",
-
     ];
+    
 
 
 include 'establishConn.php';
