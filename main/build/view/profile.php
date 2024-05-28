@@ -1,17 +1,11 @@
 <?php 
-
 session_start();
-if (isset($_POST['DeleteButton'])) {
-  include_once '../model/person.php';
-  if(Person::delete($_SESSION['id'])){
-    session_unset();
-    session_destroy();
-    header('Location: login.php');
-    exit;
-  }
-  }
+
+include_once '../model/Reservation.php';
+include_once '../model/person.php';
+
 $_SESSION['full_name'] = 'Dr. John Doe';
-$_SESSION['id'] = 2;
+$_SESSION['id'] = 1;
 $_SESSION['phone'] = '1254';
 $_SESSION['date_of_birth'] = '1977-05-27';
 $_SESSION['gender'] = 'male';
@@ -36,28 +30,7 @@ $_SESSION['Bio']='An  of considerable range, Jenna the name taken by Melbourne-r
 </head>
 
 <body>
-  <?php include_once '../model/schedule.php' ;
-
-
-  $doctor_id = 1;
-  $schedule = new Schedule($doctor_id);
-  $info = $schedule->read($doctor_id);
-  $noSchedule = false;
-  if ($info == null){
-  $noSchedule = true;
-
-  }
-  else{
-    $schedule->start_time = $info['start_time'];
-    $schedule->end_time = $info['end_time'];
-    $availability = $schedule->getAvailability();
-    $startDay = $info['startDay'];
-    $endDay =$info['endDay'];
-  }
-  ?>
-
-  <?php include_once 'components/header.php'; ?>
-
+  <?php include_once './components/header.php' ;?>
 <main class="flex justify-center items-start gap-10 p-20">
 <div class="profile-page w-2/3 " id="profile">
   <section class="relative block h-500-px">
@@ -149,71 +122,8 @@ $_SESSION['Bio']='An  of considerable range, Jenna the name taken by Melbourne-r
       </div>
     </div>
   </section>
-</div>
-<div id="actions "  class="relative ">
-  <?php if($noSchedule): ?>
-  <div class="flex flex-col items-center justify-center gap-10">
-    <h2 class=" text-left font-extrabold text-2xl text-gray-700 mb-6"></h2>
-  <?php else: ?>    
-  <h2 class=" text-left font-extrabold text-2xl text-gray-700 mb-6">Doctor available :  <?php echo $startDay . '-' . $endDay.' <br> from : '.$availability; ?></h2>
-  <?php endif; ?>
-  <div class="flex flex-col items-start justify-center gap-10 " id="schedule"> 
-  <?php
-  include_once '../model/reservation.php';
-  $reservation = new Reservation();
-  $doctor_id= 1;
-  $reservations = $reservation->getAllReservation($doctor_id);
-  if (empty($reservations)) {
-    echo '<p class="text-center text-gray-700">No reservations found.</p>';
-    exit;
-  }
-    foreach ($reservations as $reservation): ?>
-      <?php
-      $visitDate = new DateTime($reservation['visit_date']);
-      $dayOfWeek = $visitDate->format('l'); // e.g., 'Monday'
-      $day = $visitDate->format('d');
-      $month = $visitDate->format('F'); // e.g., 'January'
-      $year = $visitDate->format('Y');
-      $startTime = $visitDate->format('H:i');
-
-      $currentUnixTime = time();
-      $visitDateUnix = $visitDate->format('U');
-
-      if ($visitDateUnix > $currentUnixTime) {
-        echo '<p class="text-center text-gray-700 text-3xl font-body font-bold">No reservations found.</p>';
-        continue;
-      }    
-      // Calculate the end time by adding 2 hours to the start time
-      $endDate = clone $visitDate;
-      $endDate->modify('+2 hours');
-      $endTime = $endDate->format('H:i');
-      ?>
-      <div class="w-full bg-indigo-200 rounded-xl p-6 overflow-auto" id="Todo">
-          <h3 class="text-left font-bold text-xl text-gray-700">Reservation <?= $reservation['idReservation']; ?>:</h3>
-          <div class="w-full flex flex-col justify-evenly gap-2">
-            <p class="flex mb-4 border-b-2 border-b-indigo-400 mt-4 font-mono font-bold"><?= $dayOfWeek; ?> <span class="ml-auto"><?= $day . ' ' . $month . ' ' . $year; ?></span></p>
-            <p class="flex mb-4 border-b-2 border-b-indigo-400 font-mono font-bold">from <span class="ml-auto"><?= $startTime; ?></span></p>
-            <p class="flex mb-4 border-b-2 border-b-indigo-400 font-mono font-bold">to <span class="ml-auto"><?= $endTime; ?></span></p>
-          </div>
-        <div class="flex items-center gap-10 justify-center">
-        <button class="mt-5 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-              View Details
-          </button>
-          <button class="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-              Cancel Appointment
-          </button>
-        </div>
-      </div>
-  <?php endforeach; ?>
-  </div>
- 
-</div>
 </main>
 <?php include_once 'components/footer.php'; ?>
-
-
-
-
 </body>
 </html>
 

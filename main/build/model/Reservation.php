@@ -46,8 +46,9 @@ class Reservation {
         return $stmt;
     }
 
+    
     public function update() {
-        $query = "UPDATE Reservation SET status=:status, notes=:notes, visit_date=:visit_date WHERE id=:id";
+        $query = "UPDATE Reservation SET status=:status, notes=:notes, visit_date=:visit_date WHERE idReservation=:id";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(":id", $this->id);
@@ -59,6 +60,17 @@ class Reservation {
             return true;
         }
         return false;
+    }
+    public function setStatus() {
+        $query = "UPDATE Reservation SET status=:status WHERE idReservation=:id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id", $this->id);
+        $stmt->bindParam(":status", $this->status);
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+
     }
     public function getAllReservation($doctor_id){
         // Query to fetch reservation data
@@ -77,7 +89,7 @@ class Reservation {
         return $reservations;
     }
     public function delete() {
-        $query = "DELETE FROM Reservation WHERE id=:id";
+        $query = "DELETE FROM Reservation WHERE idReservation=:id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":id", $this->id);
 

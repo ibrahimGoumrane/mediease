@@ -1754,6 +1754,10 @@ input:checked + .toggle-bg {
   gap: 2rem;
 }
 
+.gap-14 {
+  gap: 3.5rem;
+}
+
 .gap-x-10 {
   -moz-column-gap: 2.5rem;
        column-gap: 2.5rem;
@@ -1808,6 +1812,10 @@ input:checked + .toggle-bg {
 
 .text-nowrap {
   text-wrap: nowrap;
+}
+
+.text-pretty {
+  text-wrap: pretty;
 }
 
 .break-words {
@@ -1932,6 +1940,16 @@ input:checked + .toggle-bg {
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}
+
+.border-red-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(249 128 128 / var(--tw-border-opacity));
+}
+
+.border-red-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(240 82 82 / var(--tw-border-opacity));
 }
 
 .border-b-indigo-400 {
@@ -2308,6 +2326,10 @@ input:checked + .toggle-bg {
 
 .pt-8 {
   padding-top: 2rem;
+}
+
+.pl-4 {
+  padding-left: 1rem;
 }
 
 .text-left {
