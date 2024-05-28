@@ -9,16 +9,17 @@ if (session_status() == PHP_SESSION_NONE) {
 
 // $_SESSION['is_signed_in'] = true;
 // $_SESSION['is_doctor'] = true;
-
+print_r($_SESSION);
 ?>
 
 <header class="flex justify-center items-start h-32 w-full gap-1 mx-auto px-5 flex-col bg-green-50 mb-14">
+    
     <div class="w-full flex justify-between items-center my-4 mb-1 font-serif text-base gap-44 px-10">
         <div class="w-2/4 flex justify-between items-center h-full font-serif text-base gap-20">
             <div class="flex items-center justify-center text-xl text-nowrap">
                 <p>
                     <i class="bx bx-plus-medical"></i>
-                    <span> MediEase</span>
+                    <span>MediEase</span>
                 </p>
             </div>
             <ul class="font-light flex items-center w-3/4 text-slate-400 gap-8 font-serif list-none">
@@ -60,42 +61,48 @@ if (session_status() == PHP_SESSION_NONE) {
         // }
         ?>
                
-            <div class="flex justify-center items-center h-full font-serif text-base w-1/6 gap-4 mt-3">
-                <div id="Profile" class="">
-                    <button class="">
-                        <img class=" max-h-16 h-14 w-14 object-cover rounded-full" src="../media/img/profileImage.jpeg" alt="profile" />
-                        <p class="font-2xl text-gray-500 font-bold  rounded-xl  ">Profile</p>
-                    </button>
-                    <div id="profile" class="absolute top-30 z-50 right-12 ">
-                    <!-- <section style="font-family: Montserrat" class=" bg-[#071e34] flex font-medium items-center justify-center  rounded-2xl">
-                        <section class="w-fit  mx-auto  bg-[#071e34] rounded-2xl px-8 py-6 shadow-lg p-5 flex items-center justify-start flex-col gap-2">
-                            <div class="relative w-full">
-                                <span class="absolute -top-3 -right-4 hover:cursor-pointer  bg-white text-black text-2xl font-bold p-3 rounded-full h-10  w-10 flex items-center justify-center">X</span>
-                                <div class="flex items-start justify-between flex-col">
-                                    <span class="text-gray-400 text-xl text-left">Welcome back :</span>
-                                    <span class="text-gray-400 text-md text-left">mizoxrizox@gmail.com</span>  
-                                </div>
+        <div class="flex justify-center items-center h-full font-serif text-base w-1/6 gap-4 mt-3">
+        <div id="Profile" class="">
+            <button class="" onclick="toggleProfile()">
+                <img class="max-h-16 h-14 w-14 object-cover rounded-full" src="../media/img/profileImage.jpeg" alt="profile" />
+                <p class="font-2xl text-gray-500 font-bold rounded-xl">Profile</p>
+            </button>
+            <div id="profile" class="deseaper">
+                <section style="font-family: Montserrat" class="bg-green-50 flex font-medium items-center justify-center rounded-2xl">
+                    <section class="w-fit mx-auto bg-green-50 rounded-2xl px-8 py-6 shadow-lg p-5 flex items-center justify-start flex-col gap-2">
+                        <div class="relative w-full">
+                            <span onclick="toggleProfile()" class="absolute -top-3 -right-4 hover:cursor-pointer bg-white text-black text-2xl font-bold p-3 rounded-full h-10 w-10 flex items-center justify-center">X</span>
+                            <div class="flex items-center justify-between flex-col pt-6">
+                                <span class="text-black text-xl text-center">Welcome back :</span>
+                                <span class="text-black text-md text-center">mizoxrizox@gmail.com</span>  
                             </div>
-                            <div class=" flex items-center justify-center flex-col gap-x-10">
-                                <img src="../media/img/profileImage.jpeg" class="rounded-full w-28 " alt="profile picture" srcset="">
-                                <h2 class="text-white font-bold text-2xl tracking-wide text-center">Gouumrane <br>  Ibrahim</h2>
-                            </div>
-                            <div class="flex items-center justify-center flex-col">
-                                <p class="text-emerald-400 font-semibold mt-2.5" >
-                                    ACTIVE
-                                </p>
-                                <div class="flex justify-center items-center gap-10 mt-5">
-                                    <button class=" text-nowrap bg-emerald-500 text-white font-semibold text-sm px-4 py-2 rounded-lg border border-[#071e34] hover:bg-[#071e34] hover:border-[#071e34] hover:text-white">Profile</button>
-                                    <button class="text-nowrap bg-orange-600 text-white font-semibold text-sm px-4 py-2 rounded-lg border border-[#071e34] hover:bg-[#071e34] hover:border-[#071e34] hover:text-white">Log out</button>
-                                </div>  
-                            </div>
-                        </section> -->
+                        </div>
+                        <div class="flex items-center justify-center flex-col gap-x-10">
+                            <img src="../media/img/profileImage.jpeg" class="rounded-full w-28" alt="profile picture">
+                            <h2 class=" text-emerald-500 font-bold text-2xl tracking-wide text-center">Gouumrane <br> Ibrahim</h2>
+                        </div>
+                        <div class="flex items-center justify-center flex-col">
+                            <p class="text-emerald-400 font-semibold mt-2.5">
+                                ACTIVE
+                            </p>
+                            <div class="flex justify-center items-center gap-10 mt-5">
+                                <button class="text-nowrap bg-emerald-500 text-white font-semibold text-sm px-4 py-2 rounded-lg border border-[#071e34] hover:bg-[#071e34] hover:border-[#071e34] hover:text-white">Profile</button>
+                                <button class="text-nowrap bg-orange-600 text-white font-semibold text-sm px-4 py-2 rounded-lg border border-[#071e34] hover:bg-[#071e34] hover:border-[#071e34] hover:text-white">Log out</button>
+                            </div>  
+                        </div>
                     </section>
-                    </div>
-                </div>
+                </section>
             </div>
+        </div>
+    </div>
     </div>
     <hr class="w-5/6 mx-auto bg-light-light-black opacity-75">
 
 </header>
-
+<script>
+        // Function to toggle the visibility of the profile section
+        const profile = document.getElementById('profile');
+        function toggleProfile() {
+            profile.classList.toggle('appear');
+        }
+    </script>

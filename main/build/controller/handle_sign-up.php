@@ -68,7 +68,9 @@ try {
                     $person = new Doctor($formData['full_name'], $formData['date_of_birth'], $formData['gender'], $formData['phone_number'], $formData['email'], $formData['password'], $formData['years_of_experience'], $formData['specialization']);
                 }
                 $person->create();
-                header("Location: ../view/login.php?email=".$formData['email'] ."&pass=" .$formData['password']);
+                $id = $person->getId();
+                header("Location: ../controller/handle_login.php?email=".$formData['email'] ."&data=" . $_SESSION['data'] . "&is_signed_in=true" . "&id=" . $id);
+                // header("Location: ../view/login.php?email=".$formData['email'] ."&pass=" .$formData['password']);
                 exit();
         } 
         else {
