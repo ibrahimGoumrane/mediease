@@ -145,7 +145,7 @@ $conn = establishConn();
         // Insert random data into Doctor table
         for ($i = 1; $i <= 2; $i++) {
             $yearsOfExperience = rand(1, 40);
-            $specialization = "Specialization $i";
+            $specialization = "dentistry";
             
             $query = "INSERT INTO Doctor (id, years_of_experience, specialization) VALUES (:id, :years_of_experience, :specialization)";
             $stmt = $conn->prepare($query);
@@ -293,7 +293,7 @@ $conn = establishConn();
         echo "Database dropped successfully.";
     }
 
-    // createTables($queries, $pdo);
+    //createTables($queries, $pdo);
     
     try {
         initializeTables($conn);
@@ -301,7 +301,7 @@ $conn = establishConn();
     } catch (Exception $e) {
         echo "Error initializing tables: " . $e->getMessage();
     }
-    // dropdb($dbname, $username, $password);
+    //dropdb($dbname, $username, $password);
 
 
 } catch (PDOException $e) {
