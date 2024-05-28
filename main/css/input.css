@@ -36,15 +36,14 @@
     grid-row: 3 / 4;
     grid-column: 1 / 2;
   }
+  .buttonMainHeader {
+    @apply hover: hover:bg-teal-600   hover:text-white   duration-300 text-light-green text-nowrap text-xl  px-7 py-5 w-fit rounded-3xl h-5 flex justify-center items-center;
+  }
   .buttonMain {
-    @apply hover:bg-light-black hover:rounded-full hover:text-white   duration-300 bg-black text-nowrap text-xl text-light-white px-7 py-5 w-fit rounded-3xl h-5 flex justify-center items-center;
+    @apply bg-teal-600   text-white  duration-300 hover:text-light-green text-nowrap text-xl  px-7 py-5 w-fit rounded-3xl h-5 flex justify-center items-center;
   }
   .buttonLogout {
     @apply hover:bg-light-black hover:rounded-full hover:text-white   duration-300 bg-red-700 text-nowrap text-xl text-light-white px-7 py-5 w-fit rounded-3xl h-5 flex justify-center items-center;
-
-  }
-  .buttonCancel {
-    @apply hover:bg-light-black hover:rounded-full hover:text-white   duration-300 bg-orange-700 text-nowrap text-xl text-light-white px-7 py-5 w-fit rounded-3xl h-5 flex justify-center items-center;
   }
   .date:after {
     content: "";

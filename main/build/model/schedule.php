@@ -8,7 +8,7 @@ class Schedule {
     public $end_time;
     public $startDay;
     public $endDay;
-    public function __construct( $id_schedule = null, $doctor_id = null, $start_time = null, $end_time = null, $startDay = null, $endDay = null) {
+    public function __construct($doctor_id = null, $id_schedule = null,  $start_time = null, $end_time = null, $startDay = null, $endDay = null) {
         $this->conn = establishConn();
         $this->id_schedule = $id_schedule;
         $this->doctor_id = $doctor_id;
@@ -46,13 +46,22 @@ class Schedule {
 
         return $hours >= $start_date && $hours <= $end_date;
     }
-    public function read() {
+    public function readAll() {
         $query = "SELECT * FROM Schedule";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $stmt;
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
+    public function read($id) {
+        $query = "SELECT * FROM Schedule WHERE doctor_id=:id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        return $result;
+    }
     public function update() {
         $query = "UPDATE Schedule SET doctor_id=:status, start_time=:notes, end_time=:visit_date , date=:date WHERE id_schedule=:id";
         $stmt = $this->conn->prepare($query);

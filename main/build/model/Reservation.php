@@ -62,14 +62,15 @@ class Reservation {
     }
     public function getAllReservation($doctor_id){
         // Query to fetch reservation data
-        $query = "SELECT r.idReservation, r.status, r.notes, r.visit_date, 
+        $query = "SELECT r.idReservation, r.status, r.notes, r.visit_date,
         p_patient.full_name AS patient_name, 
         p_doctor.full_name AS doctor_name
         FROM Reservation r
         JOIN Patient pa ON r.patient_id = pa.id
         JOIN Doctor d ON r.doctor_id = d.id
         JOIN Person p_patient ON pa.id = p_patient.id
-        JOIN Person p_doctor ON d.id = p_doctor.id";
+        JOIN Person p_doctor ON d.id = p_doctor.id
+        WHERE r.doctor_id = $doctor_id";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
