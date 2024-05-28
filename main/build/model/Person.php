@@ -43,7 +43,18 @@ abstract class Person {
             throw $e;
         }
     }
-
+        public function getId(){
+            return $this->id;
+        }
+    public static function readByEmail($email) {
+        Person::$conn = establishConn();
+        $query = "SELECT * FROM Person WHERE email=:email";
+        $stmt = Person::$conn->prepare($query);
+        $stmt->bindParam(":email", $email);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row;
+    }
     public function read() {
         $query = "SELECT * FROM " . $this->table_name;
         $stmt = Person::$conn->prepare($query);
@@ -68,6 +79,16 @@ abstract class Person {
         }
         return false;
     }
+    public static function getDatabasedId( $table_name , $id) {
+        Person::$conn = establishConn();
+        $query = "SELECT * FROM " . $table_name . " WHERE id=:id";
+        $stmt = Person::$conn->prepare($query);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row;
+    }
+
     public function checkEmailExsistence() {
         $query = "SELECT email FROM " . $this->table_name ;
         $stmt = Person::$conn->prepare($query);

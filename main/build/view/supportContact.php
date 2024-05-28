@@ -80,15 +80,6 @@
                     }
                 }
                 ?>
-               <!--  
-                <p class="text-left w-100 flex justify-left items-center gap-x-3 my-5 mx-3" id="support"> 
-                    <span id="icon" >
-                    <i class='bx bx-support  bg-light-green rounded-full text-light-white p-2' ></i>
-                    </span>
-                    <span id="message" class=" bg-gray-200 rounded-md font-serif font-medium p-3">
-                        hello how can i help you today ?
-                    </span>
-                </p>  -->
             </div>
             <form action="../controller/handleContactUsSubmission.php" method="post" class="w-full flex items-center justify-between gap-x-3 self-end mt-auto mx-auto ">
                 <input type="text" name="Message" id="message" class="w-4/5 h-10 bg-gray-200 rounded-md p-3 border-none" placeholder="Type your message here">

@@ -4,17 +4,6 @@ session_start();
 include_once '../model/Reservation.php';
 include_once '../model/person.php';
 
-$_SESSION['full_name'] = 'Dr. John Doe';
-$_SESSION['id'] = 1;
-$_SESSION['phone'] = '1254';
-$_SESSION['date_of_birth'] = '1977-05-27';
-$_SESSION['gender'] = 'male';
-$_SESSION['email'] = 'ibrahim@gmail.com';
-$_SESSION['years_of_experience'] = '30';
-$_SESSION['specialization'] = 'Dentiste';
-$_SESSION['location'] = 'casablanca morocco';
-$_SESSION['Bio']='An  of considerable range, Jenna the name taken by Melbourne-raised, Brooklyn-based Nick Murphy writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.';
-
 ?>
 
 <!DOCTYPE html>
@@ -107,15 +96,6 @@ $_SESSION['Bio']='An  of considerable range, Jenna the name taken by Melbourne-r
               <h3 class="text-xl font-semibold leading-normal inline-block text-blueGray-700 mb-2">
               <?php echo $_SESSION['years_of_experience']  ; ?>   years of experience
               </h3>
-            </div>
-          </div>
-          <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
-            <div class="flex flex-wrap justify-center">
-              <div class="w-full lg:w-9/12 px-4">
-                <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
-                <?php echo $_SESSION['Bio']; ?>
-                </p>
-              </div>
             </div>
           </div>
         </div>
