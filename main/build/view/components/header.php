@@ -1,4 +1,17 @@
 
+<?php 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+// session_destroy();
+// header("Location: login.php"); // Redirect to login page after logout
+// exit();
+
+$_SESSION['is_signed_in'] = true;
+$_SESSION['is_doctor'] = true;
+
+?>
+
 <header class="flex justify-center items-start h-32 w-full gap-1 mx-auto px-5 flex-col bg-light-white mb-14">
     <div class="w-full flex justify-between items-center my-4 mb-1 font-serif text-base gap-44 px-10">
         <div class="w-2/4 flex justify-between items-center h-full font-serif text-base gap-20">
@@ -9,11 +22,24 @@
                 </p>
             </div>
             <ul class="font-light flex items-center w-3/4 text-slate-400 gap-8 font-serif list-none">
-                <li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/homepage_loggedIn.php" >Find a Doctor</a></li>
-                <li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/view_patient_reservations.php">My Reservations</a></li>
-                <li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="#contact-us">Contact Us</a></li>
-                
-            </ul>
+            <?php
+            if (isset($_SESSION['is_signed_in']) && $_SESSION['is_signed_in'] === true) {
+                    if (!isset($_SESSION['is_doctor']) || $_SESSION['is_doctor'] === false) {
+                    echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/homepage_loggedIn.php">Find a Doctor</a></li>';
+                    echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/view_patient_reservations.php">My Reservations</a></li>';
+                    echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/supportContact.php">Contact Support</a></li>';
+                } else {
+                    echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/manageReservation.php">Schedule</a></li>';
+                    echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/reservationHistory.php">Reservation history</a></li>';
+                    echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/supportContact.php">Contact Support</a></li>';
+                }
+            }else{
+                echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/login.php">Find a Doctor</a></li>';
+                echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/login.php">My Reservations</a></li>';
+            }
+            echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/contactUs.php">Contact Us</a></li>';
+            echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/aboutUs.php">About Us</a></li>';
+            ?>
         </div>
         <?php
         // if (isset($_SESSION['is_signed_in']) && $_SESSION['is_signed_in'] === true) {
@@ -70,12 +96,6 @@
             </div>
     </div>
     <hr class="w-5/6 mx-auto bg-light-light-black opacity-75">
-    <div class="flex items-center justify-start text-left text-gray-400 ml-20 w-5/6 mx-auto px-10">
-        <ul class="list-none pt-1 flex items-center justify-center gap-x-10 text-sm font-normal font-serif w-fit">
-            <li class="hover:bg-transparent hover:duration-300 h-10 w-20 flex items-center justify-center"><a class="hover:duration-300 p-2 hover:border-b hover:border-b-slate-400 hover:-translate-y-0.5 text-nowrap" href="#">Small Businesses</a></li>
-            <li class="hover:bg-transparent hover:duration-300 h-10 w-20 flex items-center justify-center"><a class="hover:duration-300 p-2 hover:border-b hover:border-b-slate-400 hover:-translate-y-0.5 text-nowrap" href="#">Agencies</a></li>
-            <li class="hover:bg-transparent hover:duration-300 h-10 w-20 flex items-center justify-center"><a class="hover:duration-300 p-2 hover:border-b hover:border-b-slate-400 hover:-translate-y-0.5 text-nowrap" href="#">Freelancers</a></li>
-        </ul>
-    </div>
+
 </header>
 

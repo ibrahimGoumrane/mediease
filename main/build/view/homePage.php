@@ -93,7 +93,7 @@
             </div>
         </div>
     </footer>
-    <script  src="../media/js/index.js"></script>
+
 
 </body>
 
