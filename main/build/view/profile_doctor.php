@@ -4,6 +4,27 @@ session_start();
 include_once '../model/Reservation.php';
 include_once '../model/person.php';
 
+
+if (isset($_POST['DeleteButton'])) {
+  if(Person::delete($_SESSION['user_id'])){
+    echo 'deleted';
+    session_unset();
+    session_destroy();
+    header('Location: login.php');
+    exit;
+  }
+}
+
+// Check if user is not signed in or is not a patient
+if (!isset($_SESSION['is_signed_in'])) {
+    header("Location: ../view/login.php");
+    exit();
+}
+elseif(strcasecmp($_SESSION['user_type'], 'doctor')){
+    header("Location: ../view/profil_patient.php");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +68,6 @@ include_once '../model/person.php';
               <div class="py-6 px-3 mt-32 sm:mt-0">
                 <div class="group relative">
                   <form action="" method="POST">
-
                     <button class=" flex items-center justify-center  border-2 p-3 font-bold font-mono text-white hover:bg-white hover:text-red-500 rounded-3xl bg-red-500 hover:-translate-y-1 duration-300" type="submit" name="DeleteButton" >
                       Delete Account
                     </button>

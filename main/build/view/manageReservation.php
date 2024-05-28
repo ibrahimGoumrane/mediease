@@ -20,14 +20,7 @@ if (isset($_POST['cancel'])) {
   $reservation->setStatus();
 }  
 
-if (isset($_POST['DeleteButton'])) {
-  if(Person::delete($_SESSION['id'])){
-    session_unset();
-    session_destroy();
-    header('Location: login.php');
-    exit;
-  }
-  }
+
 
  ?>  
  

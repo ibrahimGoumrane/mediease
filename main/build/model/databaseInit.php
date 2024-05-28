@@ -293,7 +293,7 @@ $conn = establishConn();
         echo "Database dropped successfully.";
     }
 
-    //createTables($queries, $pdo);
+    createTables($queries, $pdo);
     
     try {
         initializeTables($conn);
@@ -301,7 +301,7 @@ $conn = establishConn();
     } catch (Exception $e) {
         echo "Error initializing tables: " . $e->getMessage();
     }
-    //dropdb($dbname, $username, $password);
+    // dropdb($dbname, $username, $password);
 
 
 } catch (PDOException $e) {

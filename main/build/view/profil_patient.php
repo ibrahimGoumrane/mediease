@@ -1,18 +1,32 @@
 <?php
 session_start();
+
+include_once '../model/person.php';
 // session_destroy();
 // session_start();
 // $_SESSION['is_signed_in']=true;
-$_SESSION['user_type']='patient';
+
+if (isset($_POST['DeleteButton'])) {
+  if(Person::delete($_SESSION['user_id'])){
+    echo 'deleted';
+    session_unset();
+    session_destroy();
+    header('Location: login.php');
+    exit;
+  }
+}
+
 // Check if user is not signed in or is not a patient
 if (!isset($_SESSION['is_signed_in'])) {
     header("Location: ../view/login.php");
     exit();
 }
-elseif($_SESSION['user_type'] !== 'patient'){
+elseif(strcasecmp($_SESSION['user_type'], 'patient')){
     header("Location: ../view/profil_doctor.php");
     exit();
 }
+
+ 
 print_r($_SESSION);
 echo $_SESSION['phone_number'];
 $_SESSION['location']= "Casablanca, Morocco";
@@ -59,7 +73,6 @@ $_SESSION['location']= "Casablanca, Morocco";
               <div class="py-6 px-3 mt-32 sm:mt-0">
                 <div class="group relative">
                   <form action="" method="POST">
-
                     <button class=" flex items-center justify-center  border-2 p-3 text-white hover:bg-white hover:text-red-500 rounded-3xl bg-red-500 hover:-translate-y-1 duration-300" type="submit" name="DeleteButton" >
                       Delete Account
                     </button>
@@ -75,7 +88,7 @@ $_SESSION['location']= "Casablanca, Morocco";
           </div>
           <div class="text-center mt-5">
             <h3 class="text-3xl  font-semibold leading-normal inline-block text-blueGray-700 mb-2">
-              <?php echo $_SESSION['full_name']; ?>
+              <?php echo $_SESSION['full_name']  ?>
             </h3>
             <div class="text-blueGray-600 ">
               <i class="fa fa-venus-mars mr-2 text-lg text-blueGray-400"></i> 
