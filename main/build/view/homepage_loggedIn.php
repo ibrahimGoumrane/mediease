@@ -49,8 +49,7 @@
                 if ($doctors) {
                     foreach ($doctors as $doctor) {
                         echo '<br><div class="p-8 rounded-xl border-2 border-black shadow-xl bg-gradient-to-r from-green-50 to-green-100">
-                                <p class="block mt-1 text-lg leading-tight font-medium text-black">Appointment Time: 13:00 - 14:00</p>
-                                <p class="mt-2 text-gray-500">Doctor: ' . $doctor["full_name"] . '</p>
+                                <p class="block mt-1 text-lg leading-tight font-medium text-black">Doctor: ' . $doctor["full_name"] . '</p>
                                 <div class="details hidden">
                                     <p class="mt-2 text-gray-500">Phone Number: ' . $doctor["phone_number"] . '</p>
                                     <p class="mt-2 text-gray-500">Years of Experience: ' . $doctor["years_of_experience"] . '</p>

@@ -13,9 +13,10 @@
                 </p>
             </div>
             <ul class="font-light flex items-center w-3/4 text-slate-400 gap-8 font-serif list-none">
-                <li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="#find-doctor">Find a Doctor</a></li>
-                <li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-slate-400 hover:-translate-y-0.5 duration-300" href="#contact-us">Contact Us</a></li>
-                <li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-slate-400 hover:-translate-y-0.5 duration-300" href="#about-us">About Us</a></li>
+                <li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/homepage_loggedIn.php">Find a Doctor</a></li>
+                <li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/view_patient_reservations.php">My Reservations</a></li>
+                <li class="h-10 hover:bg-transparent hover:duration-300"><a class="p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="#contact-us">Contact Us</a></li>
+                
             </ul>
         </div>
         <?php
