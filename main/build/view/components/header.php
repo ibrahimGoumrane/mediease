@@ -12,7 +12,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 ?>
 
-<header class="flex justify-center items-start h-32 w-full gap-1 mx-auto px-5 flex-col bg-light-white mb-14">
+<header class="flex justify-center items-start h-32 w-full gap-1 mx-auto px-5 flex-col bg-green-50 mb-14">
     <div class="w-full flex justify-between items-center my-4 mb-1 font-serif text-base gap-44 px-10">
         <div class="w-2/4 flex justify-between items-center h-full font-serif text-base gap-20">
             <div class="flex items-center justify-center text-xl text-nowrap">
