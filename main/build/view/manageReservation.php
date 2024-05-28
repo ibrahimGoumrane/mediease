@@ -1,6 +1,19 @@
 <?php 
-
 session_start();
+include_once "../model/Person.php";
+$_SESSION['user_type']='patient';
+// Check if user is not signed in or is not a patient
+if (!isset($_SESSION['is_signed_in'])) {
+    header("Location: ../view/login.php");
+    exit();
+}
+elseif($_SESSION['user_type'] !== 'doctor'){
+    header("Location: ../view/profil_patient.php");
+    exit();
+}
+print_r($_SESSION);
+
+$_SESSION['location']= "Casablanca, Morocco";
 
 
 include_once '../model/Reservation.php';
@@ -20,14 +33,7 @@ if (isset($_POST['cancel'])) {
   $reservation->setStatus();
 }  
 
-if (isset($_POST['DeleteButton'])) {
-  if(Person::delete($_SESSION['id'])){
-    session_unset();
-    session_destroy();
-    header('Location: login.php');
-    exit;
-  }
-  }
+
 
  ?>  
  

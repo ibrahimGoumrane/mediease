@@ -3,7 +3,14 @@ session_start();
 
 include_once '../model/Reservation.php';
 include_once '../model/person.php';
-
+if (isset($_POST['DeleteButton'])) {
+  if(Person::delete($_SESSION['id'])){
+    session_unset();
+    session_destroy();
+    header('Location: login.php');
+    exit;
+  }
+  }
 ?>
 
 <!DOCTYPE html>
