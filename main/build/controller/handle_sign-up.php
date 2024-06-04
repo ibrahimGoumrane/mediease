@@ -32,10 +32,11 @@ function sendEmail($email=null, $name='new User', $subject=null, $message=null) 
 
 
         if ($mail->send()) {
-            echo 'Email sent successfully!';
+            header("Location: ../view/sign-up.php?verification=true");
         } else {
-            echo 'Error: ' . $mail->ErrorInfo;
+            header("Location: ../view/error.php");
         }
+        exit();
     }catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     return false;
@@ -70,7 +71,6 @@ try {
                 $person->create();
                 $id = $person->getId();
                 header("Location: ../controller/handle_login.php?email=".$formData['email'] ."&data=" . $_SESSION['data'] . "&is_signed_in=true" . "&id=" . $id);
-                // header("Location: ../view/login.php?email=".$formData['email'] ."&pass=" .$formData['password']);
                 exit();
         } 
         else {
@@ -111,16 +111,28 @@ try {
         sendEmail($formData['email'], $formData['full_name'], $subject, $message);
     }   
 }
-} catch(PDOException $e) {
-    echo "Error: " . $e->getMessage();
+} catch (PDOException $e) {
+    $dupplicationError= '';
+    if ($e->getCode() == 23000) {
+        // Duplicate entry error
+        if (strpos($e->getMessage(), 'email') !== false) {
+            $dupplicationError= 'errorMail=email';
+        }
+        if (strpos($e->getMessage(), 'phone_number') !== false) {
+            $dupplicationError.= '&errorPhone=phone_number';
+            header("Location: ../view/sign-up.php?error=phone_number");
+        }
+        if (strpos($e->getMessage(), 'full_name') !== false) {
+            $dupplicationError.= '&errorFullName=full_name';
+        }
+        header("Location: ../view/sign-up.php?".$dupplicationError);
+        $_SESSION['personnalInfo']=$_POST;
+        exit();
+    } else {
+        // Other errors
+        echo "Error: " . $e->getMessage();
+    }
 }
+
 $conn = null;
 ?>
-
-
-<form action="" method="post">
-    <label for="code">Enter Verification Code:</label>
-    <input type="text" name="code" id="code" class = "bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" required>
-    <button type="submit" name="submitVerify" value="submit">Verify</button>
-</form>
-

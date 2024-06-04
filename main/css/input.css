@@ -14,8 +14,10 @@
   .gridMain {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 200px repeat(2, 150px);
+    grid-template-rows: repeat(3, 175px);
     column-gap: 50px;
+    place-items: center;
+    grid-auto-flow: row;
   }
   .gridMain > * {
     padding: 20px;
@@ -23,6 +25,8 @@
   .gridMain img {
     grid-row: 1 / 4;
     grid-column: 2 / 3;
+    mix-blend-mode: multiply;
+    border-radius: 40px;
   }
   .gridMain h1 {
     grid-row: 1 / 2;
@@ -74,4 +78,5 @@
     z-index: 100;
     border-radius: 0.375rem;
   }
+
 }

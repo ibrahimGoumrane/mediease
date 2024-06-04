@@ -15,7 +15,7 @@
         $stmt->execute([$patient_id]);
         $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -96,6 +96,5 @@
     </div>
     </main>
 <?php include './components/footer.php';?>
-    <!-- <script src="../media/js/index.js"></script> -->
 </body>
 </html>

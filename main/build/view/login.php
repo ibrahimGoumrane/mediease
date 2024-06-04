@@ -28,6 +28,10 @@
               <form class="space-y-4 md:space-y-6" action="../controller/handle_login.php" method="POST" >
                 <div>
                     <?php 
+                    if (isset($_GET['error'])) {
+                        $error = $_GET['error'];
+                            echo '<p class="text-red-500 text-sm"> '.$error.' </p>';
+                    }
                     echo '<label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>';
                     if (isset($_GET['email'])) {
                         $email = $_GET['email'];

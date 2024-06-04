@@ -22,10 +22,9 @@ try {
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
             }
-            $data = unserialize($_GET['data']) ;
+            $data =unserialize($_GET['data']) ;
             $_SESSION['user_id'] = $_GET['id'];
             $_SESSION['is_signed_in'] = true;
-            $formData = unserialize($_GET['data']);
             $_SESSION['email'] = $data['email'];
             $_SESSION['full_name'] = $data['full_name'];
             $_SESSION['date_of_birth'] = $data['date_of_birth'];
@@ -88,12 +87,13 @@ try {
             }
         }
          else {
-        echo "User not found!";
+            header("Location: ../view/login.php?error=Invalid email or password want to sign up");
+            exit();
         }
            
 }
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    header("Location: ../view/error.php");
 }
 $conn = null;
 ?>

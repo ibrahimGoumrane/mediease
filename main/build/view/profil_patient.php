@@ -27,8 +27,6 @@ elseif(strcasecmp($_SESSION['user_type'], 'patient')){
 }
 
  
-print_r($_SESSION);
-echo $_SESSION['phone_number'];
 $_SESSION['location']= "Casablanca, Morocco";
 if (isset($_POST['DeleteButton'])) {
     if(Person::delete($_SESSION['id'])){

@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (isset($_SESSION['data'])) {
+    $formData = unserialize($_SESSION['data']);
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,60 +31,91 @@
             </h1>
 
             </div>
-              <form class="space-y-4 md:space-y-6" action="../controller/handle_sign-up.php" method="post" onsubmit="return validateForm()">
+            <form class="space-y-4 md:space-y-6" action="../controller/handle_sign-up.php" method="post">
                 <div>    
                     <label for="full_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name:</label>
-                    <input type="text" id="full_name" name="full_name" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Ismail Moufatih" required="" />
+                    <?php
+                    $fullName = isset($formData['full_name']) ? $formData['full_name'] : '';
+                    echo '<input type="text" id="full_name" name="full_name" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="" value="'.$fullName.'" required="" />';
+                    if(isset($_GET['errorFullName']) && $_GET['errorFullName'] == 'full_name') {
+                        echo '<p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oh, snapp!</span> Name already exists.</p>';
+                    } 
+
+                    ?>
                 </div>
-                    <div>
+                <div>
                     <label for="date_of_birth" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date of Birth:</label>
-                    <input type="date" id="date_of_birth" name="date_of_birth"class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" required="" /></select>
+                    <?php
+                    $dateOfBirth = isset($formData['date_of_birth']) ? $formData['date_of_birth'] : '';
+                    echo '<input type="date" id="date_of_birth" name="date_of_birth" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" value="'.$dateOfBirth.'" required="" />';
+                    ?>
                 </div>
                 <div>
                     <label for="gender" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender:</label>
-                      <select id="gender" name="gender" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" required="">
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                      </select>
-                    </div>
-                    <div>
+                    <?php
+                    $gender = isset($formData['gender']) ? $formData['gender'] : '';
+                    echo '<select id="gender" name="gender" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" required="">';
+                    echo '<option value="male" '.($gender == 'male' ? 'selected' : '').'>Male</option>';
+                    echo '<option value="female" '.($gender == 'female' ? 'selected' : '').'>Female</option>';
+                    echo '</select>';
+                    ?>
+                </div>
+                <div>
                     <label for="phone_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number:</label>
-                    <input type="number" id="phone_number" name="phone_number"class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder ="06xxxxxxxx" required="" />
+                    <?php
+                    $phoneNumber = isset($formData['phone_number']) ? $formData['phone_number'] : '';
+                    echo '<input type="number" id="phone_number" name="phone_number" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="06xxxxxxxx" value="'.$phoneNumber.'" required="" />';
+                    if(isset($_GET['errorPhone']) && $_GET['errorPhone'] == 'phone_number') {
+                        echo '<p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oh, snapp!</span> Phone number already exists.</p>';
+                    }
+                    ?>
                 </div>
                 <div>
                     <label for="user_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">I am a:</label>
-                    <select id="user_type" name="user_type" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" required="">
-                        <option value="patient" selected > </option>
-                        <option value="patient">Patient</option>
-                      <option value="doctor">Doctor</option></select>
+                    <?php
+                    $userType = isset($formData['user_type']) ? $formData['user_type'] : 'patient';
+                    echo '<select id="user_type" name="user_type" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" required="">';
+                    echo '<option value="patient" '.($userType == 'patient' ? 'selected' : '').'>Patient</option>';
+                    echo '<option value="doctor" '.($userType == 'doctor' ? 'selected' : '').'>Doctor</option>';
+                    echo '</select>';
+                    ?>
                 </div>
                 <div id="years_of_experience_field" style="display: none;">
                     <label for="years_of_experience" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Years of Experience:</label>
-                    <input type="number" id="years_of_experience" name="years_of_experience" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Years of Experience" >
+                    <?php
+                    $yearsOfExperience = isset($formData['years_of_experience']) ? $formData['years_of_experience'] : '';
+                    echo '<input type="number" id="years_of_experience" name="years_of_experience" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Years of Experience" value="'.$yearsOfExperience.'" >';
+                    ?>
                 </div>
                 <div id="specialization" style="display: none;">
                     <label for="specialization" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Specialization:</label>
-                    <select id="specialization" name="specialization" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" >
-                        <option value="" disabled selected>Select a specialty</option>
-                        <option value="cardiology">Cardiology</option>
-                        <option value="dermatology">Dermatology</option>
-                        <option value="endocrinology">Endocrinology</option>
-                        <option value="gastroenterology">Gastroenterology</option>
-                        <option value="dentistry">Dentistry</option>
-                        <option value="orthopedics">Orthopedics</option>
-                        <option value="pediatrics">Pediatrics</option>
-                        <option value="neurology">Neurology</option>
-                        <option value="oncology">Oncology</option>
-                        <option value="ophthalmology">Ophthalmology</option>
-                        <option value="otolaryngology">Otolaryngology (ENT)</option>
-                        <option value="psychiatry">Psychiatry</option>
-                        <option value="radiology">Radiology</option>
-                        <option value="surgery">Surgery</option>
-                    </select>
+                    <?php
+                    $specialization = isset($formData['specialization']) ? $formData['specialization'] : '';
+                    echo '<select id="specialization" name="specialization" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" >';
+                    echo '<option value="" disabled selected>Select a specialty</option>';
+                    echo '<option value="cardiology" '.($specialization == 'cardiology' ? 'selected' : '').'>Cardiology</option>';
+                    echo '<option value="dermatology" '.($specialization == 'dermatology' ? 'selected' : '').'>Dermatology</option>';
+                    echo '<option value="endocrinology" '.($specialization == 'endocrinology' ? 'selected' : '').'>Endocrinology</option>';
+                    echo '<option value="gastroenterology" '.($specialization == 'gastroenterology' ? 'selected' : '').'>Gastroenterology</option>';
+                    echo '<option value="dentistry" '.($specialization == 'dentistry' ? 'selected' : '').'>Dentistry</option>';
+                    echo '<option value="orthopedics" '.($specialization == 'orthopedics' ? 'selected' : '').'>Orthopedics</option>';
+                    echo '<option value="pediatrics" '.($specialization == 'pediatrics' ? 'selected' : '').'>Pediatrics</option>';
+                    echo '<option value="neurology" '.($specialization == 'neurology' ? 'selected' : '').'>Neurology</option>';
+                    echo '<option value="oncology" '.($specialization == 'oncology' ? 'selected' : '').'>Oncology</option>';
+                    echo '<option value="ophthalmology" '.($specialization == 'ophthalmology' ? 'selected' : '').'>Ophthalmology</option>';
+                    echo '<option value="otolaryngology" '.($specialization == 'otolaryngology' ? 'selected' : '').'>Otolaryngology (ENT)</option>';
+                    echo '<option value="psychiatry" '.($specialization == 'psychiatry' ? 'selected' : '').'>Psychiatry</option>';
+                    echo '<option value="radiology" '.($specialization == 'radiology' ? 'selected' : '').'>Radiology</option>';
+                    echo '<option value="surgery" '.($specialization == 'surgery' ? 'selected' : '').'>Surgery</option>';
+                    echo '</select>';
+                    ?>
                 </div>
                 <div id="medical_history_field" style="display: none;">
                     <label for="medical_history" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Medical History:</label>
-                    <textarea id="medical_history" name="medical_history" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 h-40 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Enter medical history here" ></textarea>
+                    <?php
+                    $medicalHistory = isset($formData['medical_history']) ? $formData['medical_history'] : '';
+                    echo '<textarea id="medical_history" name="medical_history" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 h-40 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Enter medical history here">'.$medicalHistory.'</textarea>';
+                    ?>
                 </div>
                 <script>
                     document.getElementById('user_type').addEventListener('change', function() {
@@ -96,8 +135,13 @@
                     });
                 </script>
                 <div>
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                    <input type="email" name="email" id="email" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="name@company.com" required="">
+                    <?php
+                    $email = isset($formData['email']) ? $formData['email'] : '';
+                    echo '<input type="email" id="email" name="email" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="name@company.com" value="'.$email.'" required="">';
+                    if(isset($_GET['errorMail']) && $_GET['errorMail'] == 'email') {
+                        echo '<p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oh, snapp!</span> Email already exists.</p>';
+                    } 
+                    ?>
                 </div>
                 <div>
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
@@ -125,10 +169,43 @@
       </div>
   </div>
 
+  
+
+<div class="fixed right-0 top-0 o bottom-0 left-0 w-full h-full bg-gray-50 <?php echo isset($_GET['verification']) ? '' : 'hidden'; ?>">
+    <div id="authentication-modal" tabindex="-1" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full flex" aria-modal="true" role="dialog">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Verify your identity :
+                    </h3>
+                    <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"></path>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-4 md:p-5">
+                    <form class="space-y-4" action="../controller/handle_sign-up.php" method="post">
+                        <div>
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Verification Code : 6 digits code</label>
+                            <input type="number" name="code" id="code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="xxxxxx" required="">
+                        </div>
+                        <button type="submit" name="submitVerify" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Verify</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     <script src="../../../node_modules/flowbite/dist/flowbite.min.js"></script>
     <script src="../media/js/darkmode.js"> </script>
     <script>
-
     </script>
 </body>
 </html>
