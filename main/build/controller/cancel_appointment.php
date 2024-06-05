@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['reservation_id'])) {
     $stmt->execute([$reservation_id]);
 
     // Redirect to the reservations page
-    header('Location: ../view/view_patient_reservations.php');
+    header('Location: ../view/patientReservation.php');
     exit();
 }
 ?>

@@ -6,8 +6,7 @@
     <title>Find a Doctor</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../media/css/build.css">
-    <!-- Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="../media/js/headerJs.js" defer></script>
 </head>
 <body class="bg-gradient-to-t from-green-300 via-green-100 to-green-50">
     <?php include 'components/header.php'; ?>
@@ -120,6 +119,5 @@
             ?>
     </main>
     <?php include './components/footer.php';?>
-    <!-- <script src="../media/js/index.js"></script> -->
 </body>
 </html>

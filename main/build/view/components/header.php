@@ -11,9 +11,6 @@ if (session_status() == PHP_SESSION_NONE) {
 // $_SESSION['is_doctor'] = true;
 //print_r($_SESSION);
 ?>
-<head>
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
 <header class="flex  justify-center items-center h-28 w-full gap-1 mx-auto px-5 flex-col bg-green-50 ">    
     <div class="w-full h-full flex items-center my-4 mb-1 font-serif text-base gap-44 px-10">
         <div class="w-3/4 flex justify-between items-center h-full font-serif text-base gap-20">
@@ -27,19 +24,19 @@ if (session_status() == PHP_SESSION_NONE) {
             <ul class="font-light flex items-center text-slate-400 gap-8 font-serif list-none  " >
             <?php
             if (isset($_SESSION['is_signed_in']) && $_SESSION['is_signed_in'] === true) {
-                    if (!isset($_SESSION['is_doctor']) || $_SESSION['is_doctor'] === false) {
-                    echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class=" text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/homepage_loggedIn.php">Find a Doctor</a></li>';
-                    echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class=" text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/view_patient_reservations.php">My Reservations</a></li>';
-                    echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class=" text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/supportContact.php">Contact Support</a></li>';
+                    if (strcasecmp($_SESSION['user_type'], 'Doctor') != 0) {
+                    echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class=" text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/findDoctor.php">Find a Doctor</a></li>';
+                    echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class=" text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/patientReservation.php">My Reservations</a></li>';
+
                 } else {
                     echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class=" text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/manageReservation.php">Schedule</a></li>';
                     echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class=" text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/reservationHistory.php">Reservation history</a></li>';
-                    echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class=" text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/supportContact.php">Contact Support</a></li>';
                 }
             }else{
                 echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class=" text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/login.php">Find a Doctor</a></li>';
                 echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class=" text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/login.php">My Reservations</a></li>';
             }
+            echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class=" text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/supportContact.php">Contact Support</a></li>';
             echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class="text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/contactUs.php">Contact Us</a></li>';
             echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class="text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/aboutUs.php">About Us</a></li>';
             ?>
@@ -63,14 +60,13 @@ if (session_status() == PHP_SESSION_NONE) {
                                 <span onclick="toggleProfile()" class="absolute -top-3 -right-4 hover:cursor-pointer bg-white text-black text-2xl font-bold p-3 rounded-full h-10 w-10 flex items-center justify-center">X</span>
                                 <div class="flex items-center justify-between flex-col pt-6">
                                     <span class="text-black text-xl text-center">Welcome back :</span>
-                                    <span class="text-black text-md text-center">mizoxrizox@gmail.com</span>  
+                                    <span class="text-black text-md text-center">'. $_SESSION['email'] .'</span>  
                                 </div>
                             </div>
                             <div class="flex items-center justify-center flex-col gap-x-10">
                                 <img src="../media/img/pp.jpg" class="rounded-full w-28" alt="profile picture">
-                                <h2 class=" text-emerald-500 font-bold text-2xl tracking-wide text-center">' . $_SESSION['full_name'] .'</h2>
-
-
+                                <h2 class=" text-emerald-500 font-bold text-2xl tracking-wide text-center">' . 
+                                 $_SESSION['full_name'] .'</h2>
                             </div>
                             <div class="flex items-center justify-center flex-col">
                                 <p class="text-emerald-400 font-semibold mt-2.5">
@@ -115,10 +111,4 @@ if (session_status() == PHP_SESSION_NONE) {
         </div>
     </div>         
 </header>
-<script>
-        // Function to toggle the visibility of the profile section
-        const profile = document.getElementById('profile');
-        function toggleProfile() {
-            profile.classList.toggle('appear');
-        }
-    </script>
+

@@ -6,6 +6,7 @@
     <title>Document</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../media/css/build.css">
+    <script src="../media/js/headerJs.js" defer></script>
 
 </head>
 <body class="bg-gradient-to-t from-green-300 via-green-100 to-green-50">

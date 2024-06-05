@@ -5,10 +5,9 @@ include_once '../model/person.php';
 // session_destroy();
 // session_start();
 // $_SESSION['is_signed_in']=true;
-
+print_r($_SESSION);
 if (isset($_POST['DeleteButton'])) {
   if(Person::delete($_SESSION['user_id'])){
-    echo 'deleted';
     session_unset();
     session_destroy();
     header('Location: login.php');
@@ -47,7 +46,8 @@ if (isset($_POST['DeleteButton'])) {
     <link rel="stylesheet" href="../media/css/build.css">
     <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
     <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="../media/js/headerJs.js" defer></script>
 </head>
 
 <body>
@@ -58,11 +58,6 @@ if (isset($_POST['DeleteButton'])) {
     <div class="absolute top-0 w-full h-full bg-center bg-cover" style="background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80');">
       <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black"></span>
     </div>
-    <!--<div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px" style="transform: translateZ(0px)">
-      <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-        <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
-      </svg>
-    </div> -->
   </section>
   <section class="relative py-16">
     <div class="container mx-auto px-4">

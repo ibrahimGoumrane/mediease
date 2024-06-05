@@ -33,7 +33,6 @@ try {
             $_SESSION['password'] = $data['password'];
             $_SESSION['user_type'] = $data['user_type'];
             if(strcasecmp($_SESSION['user_type'], 'Patient') == 0){
-                echo '1';
                 $_SESSION['medical_history'] = isset($data["medical_history"]) ? $data["medical_history"] : null;
             }
             else{
@@ -41,7 +40,7 @@ try {
                 $_SESSION['specialization'] = isset($data["specialization"]) ? $data["specialization"] : null;
             }
 
-            header("Location: ../view/homePage.php");
+            // header("Location: ../view/homePage.php");
             exit();
         } 
         else {
@@ -67,23 +66,32 @@ try {
                 if ($key == 'password') {
                     continue;
                 }
+                if ($key == 'id') {
+                    $_SESSION['user_id'] = $value;
+                    continue;
+                }
                 $_SESSION[$key] = $value;
             }
-            $user= Person::getDatabasedId('Patient',$user['id']);
-            if($user){
+            $id = $_SESSION['user_id'];
+            $patient= Person::getDatabasedId('Patient',$id);
+           
+            if($patient){
                 $_SESSION['user_type'] = 'Patient';
-                $_SESSION['medical_history'] = isset($user["medical_history"]) ? $user["medical_history"] : null;
+                $_SESSION['medical_history'] = isset($patient["medical_history"]) ? $patient["medical_history"] : null;
+                header("Location: ../view/findDoctor.php");
+                exit();
             }
             else{
                 $_SESSION['user_type'] = 'Doctor';
-                $user= Person::getDatabasedId('Doctor',$user['id']);
-                $_SESSION['years_of_experience'] = isset($user["years_of_experience"]) ? $user["years_of_experience"] : null;
-                $_SESSION['specialization'] = isset($user["specialization"]) ? $user["specialization"] : null;
+                $doctor= Person::getDatabasedId('Doctor',$id);
+                $_SESSION['years_of_experience'] = isset($doctor["years_of_experience"]) ? $doctor["years_of_experience"] : null;
+                $_SESSION['specialization'] = isset($doctor["specialization"]) ? $doctor["specialization"] : null;
+                header("Location: ../view/manageReservation.php");
+                exit();
             }
 
-            // Redirect to user dashboard
-            header("Location: ../view/homepage_loggedIn.php");
-            exit();
+            
+            
             }
         }
          else {

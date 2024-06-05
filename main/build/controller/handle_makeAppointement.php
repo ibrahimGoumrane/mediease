@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute([$patient_id, $doctor_id, $status, $notes,$visit_datetime_str]);
 
     if ($stmt) {
-        header("Location: ../view/homepage_loggedin.php");
+        header("Location: ../view/findDoctor.php");
         exit();
     } else {
         echo "Error creating appointment.";

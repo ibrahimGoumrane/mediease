@@ -36,7 +36,8 @@ elseif(strcasecmp($_SESSION['user_type'], 'doctor')){
     <link rel="stylesheet" href="../media/css/build.css">
     <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
     <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="../media/js/headerJs.js" defer></script>
 </head>
 
 <body>

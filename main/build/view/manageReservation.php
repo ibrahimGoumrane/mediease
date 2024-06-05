@@ -1,23 +1,23 @@
 <?php 
 session_start();
 include_once "../model/Person.php";
-$_SESSION['user_type']='patient';
+include_once '../model/Reservation.php';
+include_once '../model/schedule.php' ;
+
 // Check if user is not signed in or is not a patient
 if (!isset($_SESSION['is_signed_in'])) {
     header("Location: ../view/login.php");
     exit();
 }
-elseif($_SESSION['user_type'] !== 'doctor'){
+elseif(strcasecmp($_SESSION['user_type'], 'Doctor') != 0){
     header("Location: ../view/profil_patient.php");
     exit();
 }
-print_r($_SESSION);
 
 $_SESSION['location']= "Casablanca, Morocco";
 
 
-include_once '../model/Reservation.php';
-include_once '../model/person.php';
+
 
 
 if (isset($_POST['approve'])) {
@@ -47,13 +47,16 @@ if (isset($_POST['cancel'])) {
     <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
     <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <script src="../../media/js/headerJs.js" defer></script>
 </head>
 
 <body>
-<?= include './components/header.php' ?>
+<?= include_once './components/header.php' ?>
 
-<?php include_once '../model/schedule.php' ;
-$doctor_id = 1;
+
+
+<?php 
+$doctor_id = $_SESSION['user_id'];
 $schedule = new Schedule($doctor_id);
 $info = $schedule->read($doctor_id);
 $noSchedule = false;
@@ -69,12 +72,17 @@ else{
 }
 ?>
 <div  class="relative p-20 text-center ">
+  <h1 class="text-5xl font-extrabold mb-8">Manage Reservations</h1>
+  <h2 class=" capitalize text-2xl font-extrabold mb-5"> Good Morning  : <?php echo $_SESSION['full_name'] ; ?> </h2>
+  <?php if ($noSchedule) : ?>
+    <h2 class=" text-left font-extrabold text-2xl text-gray-700 mb-6 text-nowrap ml-25"><?php echo 'Data about  ur availability not found ' ; ?></h2>
+  <?php else : ?>
   <h2 class=" text-left font-extrabold text-2xl text-gray-700 mb-6 text-nowrap ml-25">Your availability :  <?php echo $startDay . '-' . $endDay.' <br> from : '.$availability; ?></h2>
+  <?php endif; ?>
   <div class="flex flex-col items-start justify-center gap-10 " id="schedule"> 
   <?php
-  include_once '../model/reservation.php';
+
   $reservation = new Reservation();
-  $doctor_id= 1;
   $reservations = $reservation->getAllReservation($doctor_id);
   function IsBigger($array, $element1, $element2) {
     $index1 = array_search($element1, $array);
@@ -189,8 +197,8 @@ else{
   </div>
  
 </div>
-</main>
-<?php include_once 'components/footer.php'; ?>
+
+<?= include_once './components/footer.php' ?>
 
 
 
