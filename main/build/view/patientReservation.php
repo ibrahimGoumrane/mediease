@@ -45,7 +45,7 @@
                         return strtotime($a['visit_date']) - strtotime($b['visit_date']);
                     }
                 });
-                    foreach ($reservations as $reservation): ?>
+                foreach ($reservations as $reservation): ?>
                 <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-5">
                     <div class="p-8 flex items-center justify-between">
                         <div class="pr-4">
@@ -84,7 +84,6 @@
                                     <button type="submit" class="mt-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">Cancel Appointment</button>
                                 </form>
                             <?php endif; ?>                        
-                        
                     </div>
                 </div>
             <?php endforeach; ?>

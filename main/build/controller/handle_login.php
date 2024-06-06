@@ -40,7 +40,7 @@ try {
                 $_SESSION['specialization'] = isset($data["specialization"]) ? $data["specialization"] : null;
             }
 
-            // header("Location: ../view/homePage.php");
+            header("Location: ../view/homePage.php");
             exit();
         } 
         else {

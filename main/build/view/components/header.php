@@ -47,6 +47,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <div class="w-2/4 flex justify-end items-center h-full font-serif text-base gap-20"> 
      <?php
         if (isset($_SESSION['is_signed_in']) && $_SESSION['is_signed_in'] === true) {
+            $profileType = strcasecmp($_SESSION['user_type'], 'Doctor') != 0 ? './profil_patient.php' : './profile_doctor.php';
             echo '<div class="flex justify-center items-center h-full font-serif text-base w-1/6 gap-4 mt-3">
             <div id="Profile" class="">
                 <button class="" onclick="toggleProfile()">
@@ -65,7 +66,7 @@ if (session_status() == PHP_SESSION_NONE) {
                             </div>
                             <div class="flex items-center justify-center flex-col gap-x-10">
                                 <img src="../media/img/pp.jpg" class="rounded-full w-28" alt="profile picture">
-                                <h2 class=" text-emerald-500 font-bold text-2xl tracking-wide text-center">' . 
+                                <h2 class=" text-emerald-500 font-bold text-2xl tracking-wide text-center capitalize">' . 
                                  $_SESSION['full_name'] .'</h2>
                             </div>
                             <div class="flex items-center justify-center flex-col">
@@ -73,7 +74,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                     Online
                                 </p>
                                 <div class="flex justify-center items-center gap-10 mt-5">
-                                <form action="./profil_patient.php" method="POST" class="flex justify-center items-center">
+                                <form action="'.$profileType.'" method="POST" class="flex justify-center items-center">
                                 <button type="submit" class="text-nowrap bg-emerald-500 text-white font-semibold text-sm px-4 py-2 rounded-lg border border-[#071e34] hover:bg-[#071e34] hover:border-[#071e34] hover:text-white">Profile</button>
                                 </form>
                                 <form action="../controller/handle_log_out.php" method="GET" class="flex justify-center items-center">

@@ -21,7 +21,7 @@ if (!isset($_SESSION['is_signed_in'])) {
     exit();
 }
 elseif(strcasecmp($_SESSION['user_type'], 'patient')){
-    header("Location: ../view/profil_doctor.php");
+    header("Location: ./profil_doctor.php");
     exit();
 }
 
