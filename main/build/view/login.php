@@ -53,7 +53,7 @@
                     Don't have an account yet?  <a href="./sign-up.php" class="font-medium text-green-600 hover:underline dark:text-green-500">Sign up here</a>
                 </p>
                 <p class="text-sm font-light text-gray-500 dark:text-gray-400 mt-2">
-                   Wanna learn more about Us ?  <a href="./homePage.php" class="font-medium text-green-600 hover:underline dark:text-green-500">Click here</a>
+                   Wanna learn more about Us ?  <a href="./aboutUs.php" class="font-medium text-green-600 hover:underline dark:text-green-500">Click here</a>
                 </p>
                 </div>
 

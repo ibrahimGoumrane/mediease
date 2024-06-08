@@ -54,9 +54,14 @@ module.exports = {
                     '80%': { transform: 'translateY(-25%)' },
                     '100%': { transform: 'translateY(0%)' },
                 },
+                'popup-animation': {
+                    '0%': { opacity: '1' },
+                    '100%': { opacity: '0' },
+                }
             },
             animation: {
                 'bounce-items': 'bounce-items 0.5s ease-in-out forwards infinite',
+                'popup-animation': 'popup-animation 1s ease-in-out forwards 0.5',
             },
             gridTemplateColumns: {
                 'profile': '60% 30%',

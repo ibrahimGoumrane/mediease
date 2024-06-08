@@ -57,7 +57,18 @@ class Doctor extends Person {
         }
         return false;
     }
-
+    public static function getDoctorBasedSpecialisation($specialization) {
+        Doctor::$conn = establishConn();
+        $query = "SELECT p.full_name, p.phone_number, d.years_of_experience, d.specialization, d.id 
+                  FROM Person p
+                  JOIN Doctor d ON p.id = d.id
+                  WHERE d.specialization = :specialization";
+        $stmt = Doctor::$conn->prepare($query);
+        $stmt->bindParam(':specialization', $specialization, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     public static function delete($id) {
         Doctor::$conn = establishConn();
         $query = "DELETE FROM Doctor WHERE id=:id";

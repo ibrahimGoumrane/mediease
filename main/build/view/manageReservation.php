@@ -34,10 +34,17 @@ if (isset($_POST['cancel'])) {
   $reservation->setStatus();
 }  
 
+?>  
+<?php 
+// Check if 'availability' is set and true, then store its status in a variable
+$showToast = isset($_GET['availability']) && $_GET['availability'] == true;
 
+// Clear the GET variables
+if ($showToast) {
+    unset($_GET['availability']);
+}
+?> 
 
- ?>  
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,7 +61,24 @@ if (isset($_POST['cancel'])) {
 <body>
 <?= include_once './components/header.php' ?>
 
+<?php if ($showToast): ?>
 
+<div id="toast-simple" class="h-screen w-screen fixed top-0 left-0 flex items-end justify-end opacity-100 duration-300">
+  <div  class="mb-10 mr-10 flex items-center w-full max-w-xs p-4 space-x-4 rtl:space-x-reverse text-gray-500 bg-white divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800" role="alert">
+      <svg class="w-5 h-5 text-blue-600 dark:text-blue-500 rotate-45" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 17 8 2L9 1 1 19l8-2Zm0 0V9"/>
+      </svg>
+      <div class="ps-4 text-sm font-normal ">Schedule added successfully.</div>
+  </div>
+</div>
+<script>
+        setTimeout(function () {
+            const toast = document.getElementById('toast-simple');
+            toast.classList.add('hidden');
+            toast.classList.add('opacity-0');
+        }, 2000);
+</script>
+<?php endif; ?>
 
 <?php 
 $doctor_id = $_SESSION['user_id'];
@@ -72,15 +96,17 @@ else{
   $endDay =$info['endDay'];
 }
 ?>
-<div  class="relative p-20 text-center min-h-screen mb-10">
 
+<div  class="relative p-20 text-center min-h-screen mb-10">
     <h1 class="text-5xl font-extrabold mb-8">Manage Reservations</h1>
     <h2 class=" capitalize text-2xl font-extrabold mb-5"> Good Morning  : <?php echo $_SESSION['full_name'] ; ?> </h2>
   
     <?php if ($noSchedule) : ?>
-    <h2 class=" text-left font-extrabold text-2xl text-gray-700 mb-6 text-nowrap ml-25"><?php echo 'Data about  ur availability not found ' ; ?></h2>
+    <h2 class="text-left font-extrabold text-2xl text-gray-700 mb-6 text-nowrap ml-25">
+      <?php 
+          echo 'Data about your availability not found. to add your availability  <a href="./add_availability.php" class="ml-4 text-green-500   hover:underline">click here</a>';?>
   <?php else : ?>
-  <h2 class=" text-left font-extrabold text-2xl text-gray-700 mb-6 text-nowrap ml-25">Your availability :  <?php echo $startDay . '-' . $endDay.' <br> from : '.$availability; ?></h2>
+  <h2 class="">Your availability :  <?php echo $startDay . '-' . $endDay.' <br> from : '.$availability; ?></h2>
   <?php endif; ?>
   <div class="flex flex-col items-start justify-center gap-10 " id="schedule"> 
   <?php
@@ -88,7 +114,7 @@ else{
   $reservations = Reservation::getAllReservation($doctor_id);
   $rese = new Reservation();
   if (empty($reservations)) {
-    echo '<p class="text-center text-gray-700">No reservations found.</p>';
+    echo '<p class=" font-extrabold text-2xl text-gray-700 mb-6 text-nowrap ml-25">No reservations found.</p>';
     exit;
   }
   $i = 2;
@@ -144,11 +170,7 @@ else{
   </div>
 </div>
 
-
 <?= include_once './components/footer.php' ?>
-
-
-
 
 </body>
 </html>

@@ -83,7 +83,21 @@ class Reservation {
           JOIN patient pa ON r.patient_id = pa.id
           JOIN Person p ON pa.id = p.id
           WHERE r.doctor_id = $doctor_id
-          ORDER BY visit_date";;
+          ORDER BY visit_date";
+        $stmt = Reservation::$conn->prepare($query);
+        $stmt->execute();
+        $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $reservations;
+    }
+    public static function getPatientReservation($user_id){
+        // Query to fetch reservation data
+        Reservation::$conn = establishConn();
+        $query = $query = "SELECT r.*, d.specialization, p.full_name 
+                                FROM Reservation r
+                                JOIN Doctor d ON r.doctor_id = d.id
+                                JOIN Person p ON d.id = p.id
+                                WHERE r.patient_id = $user_id 
+                                ORDER BY visit_date";
         $stmt = Reservation::$conn->prepare($query);
         $stmt->execute();
         $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);

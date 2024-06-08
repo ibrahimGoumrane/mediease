@@ -117,6 +117,7 @@ if (isset($_SESSION['data'])) {
                     echo '<textarea id="medical_history" name="medical_history" class="bg-white border border-green-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 h-40 dark:bg-green-700 dark:border-green-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Enter medical history here">'.$medicalHistory.'</textarea>';
                     ?>
                 </div>
+
                 <script>
                     document.getElementById('user_type').addEventListener('change', function() {
                         let userType = this.value;

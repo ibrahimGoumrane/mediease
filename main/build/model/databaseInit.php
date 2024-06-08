@@ -133,188 +133,12 @@ try {
     ];
     
     
-
-
-include 'establishConn.php';
-$conn = establishConn();
-
-    function initializeTables($conn) {
-        // Insert random data into Person table
-        for ($i = 1; $i <= 2; $i++) {
-            $fullName = "Person $i";
-            $dateOfBirth = date('Y-m-d', strtotime('-' . rand(20, 50) . ' years'));
-            $gender = (rand(0, 1) == 1) ? 'male' : 'female';
-            $phoneNumber = '123-456-' . str_pad($i, 4, '0', STR_PAD_LEFT);
-            $email = "person$i@example.com";
-            $password = password_hash("password$i", PASSWORD_DEFAULT);
-            
-            $query = "INSERT INTO Person (full_name, date_of_birth, gender, phone_number, email, password)
-                    VALUES (:full_name, :date_of_birth, :gender, :phone_number, :email, :password)";
-            $stmt = $conn->prepare($query);
-            $stmt->execute([
-                ':full_name' => $fullName,
-                ':date_of_birth' => $dateOfBirth,
-                ':gender' => $gender,
-                ':phone_number' => $phoneNumber,
-                ':email' => $email,
-                ':password' => $password,
-            ]);
-        }
-
-        // Insert random data into Patient table
-        for ($i = 1; $i <= 2; $i++) {
-            $medicalHistory = "Medical history for patient $i";
-            
-            $query = "INSERT INTO Patient (id, medical_history) VALUES (:id, :medical_history)";
-            $stmt = $conn->prepare($query);
-            $stmt->execute([
-                ':id' => $i,
-                ':medical_history' => $medicalHistory,
-            ]);
-        }
-
-        // Insert random data into Doctor table
-        for ($i = 1; $i <= 2; $i++) {
-            $yearsOfExperience = rand(1, 40);
-            $specialization = "dentistry";
-            
-            $query = "INSERT INTO Doctor (id, years_of_experience, specialization) VALUES (:id, :years_of_experience, :specialization)";
-            $stmt = $conn->prepare($query);
-            $stmt->execute([
-                ':id' => $i,
-                ':years_of_experience' => $yearsOfExperience,
-                ':specialization' => $specialization,
-            ]);
-        }
-
-        // Insert random data into Reservation table
-        for ($i = 1; $i <= 2; $i++) {
-            $patientId = $i;
-            $doctorId = $i;
-            $status = 'pending';
-            $notes = "Reservation notes $i";
-            $visitDate = date('Y-m-d H:i:s', strtotime('+' . rand(1, 7) . ' days'));
-            
-            $query = "INSERT INTO Reservation (patient_id, doctor_id, status, notes, visit_date) VALUES (:patient_id, :doctor_id, :status, :notes, :visit_date)";
-            $stmt = $conn->prepare($query);
-            $stmt->execute([
-                ':patient_id' => $patientId,
-                ':doctor_id' => $doctorId,
-                ':status' => $status,
-                ':notes' => $notes,
-                ':visit_date' => $visitDate,
-            ]);
-        }
-
-        // Insert random data into MedicalRecords table
-        for ($i = 1; $i <= 2; $i++) {
-            $patientId = $i;
-            $doctorId = $i;
-            $diagnosis = "Diagnosis $i";
-            $visitDate = date('Y-m-d H:i:s', strtotime('+' . rand(1, 7) . ' days'));
-            $treatment = "Treatment $i";
-            $notes = "Notes $i";
-            
-            $query = "INSERT INTO MedicalRecords (patient_id, doctor_id, diagnosis, visit_date, treatment, notes) VALUES (:patient_id, :doctor_id, :diagnosis, :visit_date, :treatment, :notes)";
-            $stmt = $conn->prepare($query);
-            $stmt->execute([
-                ':patient_id' => $patientId,
-                ':doctor_id' => $doctorId,
-                ':diagnosis' => $diagnosis,
-                ':visit_date' => $visitDate,
-                ':treatment' => $treatment,
-                ':notes' => $notes,
-            ]);
-        }
-
-        // Insert random data into Payment table
-        for ($i = 1; $i <= 2; $i++) {
-            $patientId = $i;
-            $amount = rand(50, 500);
-            $paymentDate = date('Y-m-d H:i:s', strtotime('+' . rand(1, 7) . ' days'));
-            $paymentMethod = (rand(0, 1) == 1) ? 'credit_card' : 'cash';
-            $status = (rand(0, 1) == 1) ? 'paid' : 'pending';
-            
-            $query = "INSERT INTO Payment (patient_id, amount, payment_date, payment_method, status) VALUES (:patient_id, :amount, :payment_date, :payment_method, :status)";
-            $stmt = $conn->prepare($query);
-            $stmt->execute([
-                ':patient_id' => $patientId,
-                ':amount' => $amount,
-                ':payment_date' => $paymentDate,
-                ':payment_method' => $paymentMethod,
-                ':status' => $status,
-            ]);
-        }
-
-        // Insert random data into MedicalSupply table
-        for ($i = 1; $i <= 2; $i++) {
-            $name = "Supply $i";
-            $quantity = rand(10, 100);
-            $supplier = "Supplier $i";
-            $purchaseDate = date('Y-m-d', strtotime('-' . rand(1, 12) . ' months'));
-            $expireDate = date('Y-m-d', strtotime('+' . rand(1, 24) . ' months'));
-            
-            $query = "INSERT INTO MedicalSupply (name, quantity, supplier, purchase_date, expire_date) VALUES (:name, :quantity, :supplier, :purchase_date, :expire_date)";
-            $stmt = $conn->prepare($query);
-            $stmt->execute([
-                ':name' => $name,
-                ':quantity' => $quantity,
-                ':supplier' => $supplier,
-                ':purchase_date' => $purchaseDate,
-                ':expire_date' => $expireDate,
-            ]);
-        }
-
-        // Insert random data into Schedule table
-        for ($i = 1; $i <= 2; $i++) {
-            $doctorId = $i;
-            $startTime = date('H:i:s', strtotime(rand(8, 10) . ':00:00'));
-            $endTime = date('H:i:s', strtotime(rand(16, 18) . ':00:00'));
-            $startDay = 'Monday';
-            $endDay = 'Friday';
-            
-            $query = "INSERT INTO Schedule (doctor_id, start_time, end_time, startDay, endDay) VALUES (:doctor_id, :start_time, :end_time, :startDay, :endDay)";
-            $stmt = $conn->prepare($query);
-            $stmt->execute([
-                ':doctor_id' => $doctorId,
-                ':start_time' => $startTime,
-                ':end_time' => $endTime,
-                ':startDay' => $startDay,
-                ':endDay' => $endDay,
-            ]);
-        }
-
-        // Insert random data into ContactUs table
-        for ($i = 1; $i <= 2; $i++) {
-            $name = "Contact $i";
-            $email = "contact$i@example.com";
-            $phoneNumber = '123-456-' . str_pad($i, 4, '0', STR_PAD_LEFT);
-            $message = "Message $i";
-            $treated = (rand(0, 1) == 1) ? true : false;
-            $userMail = "user$i@example.com";
-            
-            $query = "INSERT INTO ContactUs (name, email, phone_number, message, treated, User_mail) VALUES (:name, :email, :phone_number, :message, :treated, :User_mail)";
-            $stmt = $conn->prepare($query);
-            $stmt->execute([
-                ':name' => $name,
-                ':email' => $email,
-                ':phone_number' => $phoneNumber,
-                ':message' => $message,
-                ':treated' => $treated,
-                ':User_mail' => $userMail,
-            ]);
-        }
-    }
-
-
     function  createTables($queries, $pdo){
         foreach ($queries as $query) {
             $pdo->exec($query);
         }
         echo "Database and tables created successfully.";
     }
-
-
 
 
     function dropdb($dbname, $username, $password)
@@ -324,7 +148,7 @@ $conn = establishConn();
         echo "Database dropped successfully.";
     }
 
-    // createTables($queries, $pdo);
+    createTables($queries, $pdo);
     
     // try {
     //     initializeTables($conn);

@@ -1,19 +1,8 @@
    <?php
         session_start();
-        include_once '../model/establishConn.php';
-        $conn = establishConn();
-
-        // Assume a logged-in patient ID, replace with actual session user ID
-        $patient_id = 1;
-
-        $stmt = $conn->prepare("SELECT r.*, d.specialization, p.full_name 
-                                FROM Reservation r
-                                JOIN Doctor d ON r.doctor_id = d.id
-                                JOIN Person p ON d.id = p.id
-                                WHERE r.patient_id = ? 
-                                ORDER BY visit_date");
-        $stmt->execute([$patient_id]);
-        $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        require_once '../model/reservation.php';
+        $reservations = Reservation::getPatientReservation($_SESSION['user_id']);
+        
         ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,8 +66,9 @@
                                         break;
                                 }
                                 ?>
-                                <p class="<?php echo "mt-2 ". $statusColor; ?>"><?php echo "Status: ". $status; ?></p>
-                                </div> <?php if ($reservation['status'] !== 'canceled') : ?>
+                                <p class="<?php echo "mt-2 ". $statusColor; ?>">
+                                    <?php echo "Status: ". $status; ?></p>
+                            </div> <?php if ($reservation['status'] === 'pending') : ?>
                                 <form method="post" action="../controller/cancel_appointment.php">
                                     <input type="hidden" name="reservation_id" value="<?php echo $reservation['idReservation']; ?>">
                                     <button type="submit" class="mt-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">Cancel Appointment</button>
@@ -90,7 +80,7 @@
         <?php else: ?>
             <p>You have no reservations.</p>
         <?php endif; ?>
-        <a href="../view/findDoctor.php" class="text-blue-500">Back to Home</a>
+        <a href="../view/findDoctor.php" class="mx-auto mt-10 mb-10 hover:underline underline-offset-2 text-green-400">Back to Home</a>
     </div>
     </main>
 <?php include './components/footer.php';?>

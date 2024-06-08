@@ -21,7 +21,7 @@ class Schedule {
     public function create() {
         $query = "INSERT INTO Schedule (doctor_id, start_time, end_time , startDay ,endDay) VALUES (:doctor_id, :start_time, :end_time ,:startDay,:endDay)";
         $stmt = $this->conn->prepare($query);
-
+        
         $stmt->bindParam(":doctor_id", $this->doctor_id);
         $stmt->bindParam(":start_time", $this->start_time);
         $stmt->bindParam(":end_time", $this->end_time);
@@ -45,6 +45,14 @@ class Schedule {
         $end_date = new DateTime($this->end_time);
 
         return $hours >= $start_date && $hours <= $end_date;
+    }
+    public static function getDoctorSchedule($doctor_id) {
+        $conn = establishConn();
+        $query = "SELECT * FROM Schedule WHERE doctor_id = $doctor_id";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
     }
     public function readAll() {
         $query = "SELECT * FROM Schedule";

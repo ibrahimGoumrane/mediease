@@ -1,12 +1,13 @@
 <?php
 include_once '../model/establishConn.php';
 $conn = establishConn();
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $visit_date = $_POST['visit_date'];
     $time_slot = $_POST['time_slot'];
     $doctor_id = $_POST['id'];
-    $patient_id = 1; // Assume a logged-in patient ID, replace with actual session user ID
+    $patient_id = $_SESSION['user_id'];
     $status= 'pending';
     $notes='';
 

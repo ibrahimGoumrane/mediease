@@ -3,13 +3,6 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-// session_destroy();
-// header("Location: login.php"); // Redirect to login page after logout
-// exit();
-
-// $_SESSION['is_signed_in'] = true;
-// $_SESSION['is_doctor'] = true;
-//print_r($_SESSION);
 ?>
 <header class="flex  justify-center items-center h-28 w-full gap-1 mx-auto px-5 flex-col bg-green-50 ">    
     <div class="w-full h-full flex items-center my-4 mb-1 font-serif text-base gap-44 px-10">
@@ -47,7 +40,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <div class="w-2/4 flex justify-end items-center h-full font-serif text-base gap-20"> 
      <?php
         if (isset($_SESSION['is_signed_in']) && $_SESSION['is_signed_in'] === true) {
-            $profileType = strcasecmp($_SESSION['user_type'], 'Doctor') != 0 ? './profil_patient.php' : './profile_doctor.php';
+            $profileType =  './profile.php' ;
             echo '<div class="flex justify-center items-center h-full font-serif text-base w-1/6 gap-4 mt-3">
             <div id="Profile" class="">
                 <button class="" onclick="toggleProfile()">

@@ -2,10 +2,6 @@
 session_start();
 
 include_once '../model/person.php';
-// session_destroy();
-// session_start();
-// $_SESSION['is_signed_in']=true;
-print_r($_SESSION);
 if (isset($_POST['DeleteButton'])) {
   if(Person::delete($_SESSION['user_id'])){
     session_unset();
@@ -18,10 +14,6 @@ if (isset($_POST['DeleteButton'])) {
 // Check if user is not signed in or is not a patient
 if (!isset($_SESSION['is_signed_in'])) {
     header("Location: ../view/login.php");
-    exit();
-}
-elseif(strcasecmp($_SESSION['user_type'], 'patient')){
-    header("Location: ./profil_doctor.php");
     exit();
 }
 
@@ -88,42 +80,58 @@ if (isset($_POST['DeleteButton'])) {
             </div>
           </div>
           <div class="text-center mt-5">
-            <h3 class="text-3xl  font-semibold leading-normal inline-block text-blueGray-700 mb-2">
+            <h3 class="text-3xl  font-semibold leading-normal inline-block text-blueGray-700 mb-2 capitalize">
+              <?php echo  strcasecmp($_SESSION['user_type'], 'patient') === 0  ? 'Mr : ' : 'Dr :' ?>
+              
               <?php echo $_SESSION['full_name']  ?>
             </h3>
             <div class="text-blueGray-600 ">
               <i class="fa fa-venus-mars mr-2 text-lg text-blueGray-400"></i> 
-              <h3 class="text-xl font-semibold leading-normal inline-block text-blueGray-700 mb-2">
+              <h3 class="text-xl font-semibold leading-normal inline-block text-blueGray-700 mb-2 capitalize">
               <?php echo $_SESSION['gender']; ?> 
               </h3>
             </div>
             <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
               <i class='bx bxs-phone mr-2 text-lg text-blueGray-400' ></i>
-              <h3 class="text-xl font-semibold leading-normal inline-block text-blueGray-700 mb-2">
+              <h3 class="text-xl font-semibold leading-normal inline-block text-blueGray-700 mb-2 capitalize">
                 <?php echo $_SESSION['phone_number']; ?> 
               </h3> 
             </div>
             <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-              <i class='bx bx-envelope mr-2 text-lg text-blueGray-400' ></i>
-              <h3 class="text-xl font-semibold leading-normal inline-block text-blueGray-700 mb-2">
-                <?php echo $_SESSION['email']; ?>
-              </h3>
-            </div>
-            <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
               <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-              <h3 class="text-xl font-semibold leading-normal inline-block text-blueGray-700 mb-2">
+              <h3 class="text-xl font-semibold leading-normal inline-block text-blueGray-700 mb-2 capitalize">
               <?php echo $_SESSION['location']; ?> 
               </h3>
             </div>
-          <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
+          <?php if(strcasecmp($_SESSION['user_type'], 'patient') == 0 ): ?>
+          <div class="mt-10 py-10 border-t border-blueGray-200 text-center" id="profile-patient">
             <div class="flex flex-wrap justify-center">
               <div class="w-full lg:w-9/12 px-4">
-                <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
-                <?php echo $_SESSION['medical_history']; ?>
+                <p class="mb-4 text-lg leading-relaxed text-blueGray-700 capitalize">
+                  <i class='bx bx-plus-medical'></i>
+                <?php 
+                echo isset($_SESSION['medical_history']) && $_SESSION['medical_history'] !=='' ? $_SESSION['medical_history'] : 'no data Found about medical history' ;  ?>
                 </p>
               </div>
             </div>
           </div>
+          
+          <?php else : ?>
+          <div class="mt-10 py-10 border-t border-blueGray-200 text-center" id="profile-doctor">
+            <div class="mb-2 text-blueGray-600 mt-10">
+                <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i> 
+                <h3 class="text-xl font-semibold leading-normal inline-block text-blueGray-700 mb-2">
+                <?php echo $_SESSION['specialization']; ?> 
+                </h3>
+            </div>
+            <div class="mb-2 text-blueGray-600">
+                <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i> 
+                <h3 class="text-xl font-semibold leading-normal inline-block text-blueGray-700 mb-2">
+                <?php echo $_SESSION['years_of_experience']  ; ?>   years of experience
+                </h3>
+            </div>
+          </div>
+          <?php endif; ?>
         </div>
       </div>
     </div>
