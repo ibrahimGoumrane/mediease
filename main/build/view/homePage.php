@@ -13,21 +13,21 @@
 <?php session_start();
 include 'components/header.php'; 
 ?>
-    <main class=" section-min-height gridMain w-5/6  mx-auto mt-20 px-10 place-content-start ">
-        <h1 class=" text-5xl font-extrabold tracking-wider  text-left ">Welcome to MediEase</h1>
+    <main class="  gridMain w-5/6  mx-auto mt-20 px-10 place-content-start ">
+        <h1 class=" text-5xl font-extrabold tracking-wider  text-left ">Welcome to <span class="text-green-400 ">MediEase</span> </h1>
         <p class=" font-serif text-wrap text-left text-xl font-light  ">At MediEase, we are dedicated to transforming the healthcare experience.
              Our innovative platform connects you with top healthcare professionals and provides the tools you need to manage your health effectively. 
              Whether you need a quick consultation, a detailed medical record, or a reliable source for medical supplies, we have you covered.
         </p>
         <?php if (!isset($_SESSION['is_signed_in'])): ?>
-        <form action="./login.php" method="get" class="flex items-center justify-center flex-col">
+        <form action="./sign-up.php" method="get" class="flex items-center justify-center flex-col">
             <div class="flex items-center justify-center   drop-shadow-2xl my-5  ">
                 <button class="buttonMain relative  hover:-translate-x-4 font-mono" >Get Started Today</button>
             </div>
             <p>⭐⭐⭐⭐⭐ based on 1,000 review from Our customers </p>
         </form>
         <?php endif; ?>
-            <img class="place-self-center  h-20  rounded-2xl" src="..\media\img\doctorhomepage.png" alt="hero" class="w-3/4 mx-auto">
+            <img class="place-self-center scale-150 rounded-2xl" src="..\media\img\doctorhomepage.png" alt="hero" class="w-3/4 mx-auto">
         </main>
         
         <section id="features"

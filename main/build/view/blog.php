@@ -7,7 +7,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="../media/js/headerJs.js" defer></script>
 </head>
-<body>
+<body class="bg-gradient-to-t from-green-300 via-green-100 to-green-50 min-h-screen">
     <?php include_once './components/header.php' ;?>
 <section class="bg-white dark:bg-gray-900 bg-gradient-to-t from-green-50 via-green-100 to-green-50">
   <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 rounded-2xl">
@@ -31,7 +31,7 @@
                   <div class="flex items-center space-x-4 gap-5 justify-between">
                       <img class="w-7 h-7 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="Jese Leos avatar" />
                       <span class="font-medium dark:text-white">
-                            Serge Kass
+                            ibrahim Goumrane
                       </span>
                   </div>
               </div>

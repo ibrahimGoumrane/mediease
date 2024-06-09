@@ -29,7 +29,6 @@ if (session_status() == PHP_SESSION_NONE) {
                 echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class=" text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/login.php">Find a Doctor</a></li>';
                 echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class=" text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/login.php">My Reservations</a></li>';
             }
-            echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class=" text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/supportContact.php">Contact Support</a></li>';
             echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class="text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/contactUs.php">Contact Us</a></li>';
             echo '<li class="h-10 hover:bg-transparent hover:duration-300"><a class="text-nowrap p-2 block relative hover:border-b hover:border-b-green-400 hover:-translate-y-0.5 duration-300" href="../view/aboutUs.php">About Us</a></li>';
             ?>
@@ -90,7 +89,7 @@ if (session_status() == PHP_SESSION_NONE) {
             <a href="./login.php">Log in</a>
             
             </button>
-            <button type="submit" class="text-black bg-emerald-200 hover:bg-transparent duration-300 hover:translate-x-5 translate-x-0 hover:text-black  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-center font-mono p-3 w-1/4 justify-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <button type="submit" class="text-black text-nowrap bg-emerald-200 hover:bg-transparent duration-300 hover:translate-x-5 translate-x-0 hover:text-black  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-center font-mono p-3 w-1/4 justify-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             <a href="./sign-up.php">Sign up</a>
             
             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
