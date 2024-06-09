@@ -48,7 +48,7 @@
               <p class="mb-5 font-light text-gray-500 dark:text-gray-400 text-center"> Learn the best practices for making and managing reservations with healthcare professionals, ensuring a smooth and efficient experience.</p>
               <div class="flex justify-between items-center">
                   <div class="flex items-center justify-between space-x-4 gap-5">
-                      <img class="w-7 h-7 rounded-full" src="../media/img/ismail.jpg" alt="Bonnie Green avatar" />
+                      <img class="w-7 h-7 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="Bonnie Green avatar" />
                       <span class="font-medium dark:text-white">
                             ismail moufatih
                       </span>
