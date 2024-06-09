@@ -58,7 +58,7 @@ if ($showToast) {
     <script src="../media/js/headerJs.js" defer></script>
 </head>
 
-<body>
+<body class="bg-gradient-to-t from-green-300 via-green-100 to-green-50">
 <?= include_once './components/header.php' ?>
 
 <?php if ($showToast): ?>
@@ -99,7 +99,7 @@ else{
 
 <div  class="relative p-20 text-center min-h-screen mb-10">
     <h1 class="text-5xl font-extrabold mb-8">Manage Reservations</h1>
-    <h2 class=" capitalize text-2xl font-extrabold mb-5"> Good Morning  : <?php echo $_SESSION['full_name'] ; ?> </h2>
+    <h2 class=" capitalize text-2xl font-bold mb-5"> Welcome Back, <?php echo $_SESSION['full_name'] ; ?> </h2>
   
     <?php if ($noSchedule) : ?>
     <h2 class="text-left font-extrabold text-2xl text-gray-700 mb-6 text-nowrap ml-25">
@@ -114,7 +114,7 @@ else{
   $reservations = Reservation::getAllReservation($doctor_id);
   $rese = new Reservation();
   if (empty($reservations)) {
-    echo '<p class=" font-extrabold text-2xl text-gray-700 mb-6 text-nowrap ml-25">No reservations found.</p>';
+    echo '<p class=" font-bold text-2xl text-red-700 mb-6 text-nowrap ml-25 flex justify-center ">No reservations found.</p>';
     exit;
   }
   $i = 2;

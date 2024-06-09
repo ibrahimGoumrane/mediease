@@ -14,8 +14,8 @@
 include 'components/header.php'; 
 ?>
     <main class=" section-min-height gridMain w-5/6  mx-auto mt-20 px-10 place-content-start ">
-        <h1 class=" text-5xl font-extrabold tracking-wider  text-left ">Welcome to Medease</h1>
-        <p class=" font-serif text-wrap text-left text-xl font-light  ">At Medease, we are dedicated to transforming the healthcare experience.
+        <h1 class=" text-5xl font-extrabold tracking-wider  text-left ">Welcome to MediEase</h1>
+        <p class=" font-serif text-wrap text-left text-xl font-light  ">At MediEase, we are dedicated to transforming the healthcare experience.
              Our innovative platform connects you with top healthcare professionals and provides the tools you need to manage your health effectively. 
              Whether you need a quick consultation, a detailed medical record, or a reliable source for medical supplies, we have you covered.
         </p>
