@@ -27,7 +27,7 @@ include 'components/header.php';
             <p>⭐⭐⭐⭐⭐ based on 1,000 review from Our customers </p>
         </form>
         <?php endif; ?>
-            <img class="place-self-center  h-3/4 rounded-2xl" src="../media/img/mainImage.jpg" alt="hero" class="w-3/4 mx-auto">
+            <img class="place-self-center  h-20  rounded-2xl" src="..\media\img\doctorhomepage.png" alt="hero" class="w-3/4 mx-auto">
         </main>
         
         <section id="features"
