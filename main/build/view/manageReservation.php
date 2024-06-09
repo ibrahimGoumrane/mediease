@@ -147,24 +147,28 @@ else{
         continue;
       }
       ?>
-      <div class="w-3/4 mx-auto border-red-400 border-2 rounded-xl p-6 overflow-auto" id="Todo">
-          <h3 class="pl-4 uppercase text-pretty text-black text-xl">Reservation <?= $i ?>: <span class="pl-4 uppercase text-pretty text-black text-xl"> <?= $reservation['status'] ?> </span> </h3>
-            <div class="w-full flex flex-col justify-evenly gap-2">
-            <p class="flex mb-4 border-b-2 border-red-500  mt-4 font-mono font-bold"><?= $dates['dayOfWeek']; ?> <span class="ml-auto"><?= $dates['day'] . ' ' . $dates['month'] . ' ' . $dates['year']; ?></span></p>
-            <p class="flex mb-4 border-b-2 border-red-500  font-mono font-bold">from <span class="ml-auto"><?= $dates['startTime']; ?></span></p>
-            <p class="flex mb-4 border-b-2 border-red-500  font-mono font-bold">to <span class="ml-auto"><?= $dates['endTime']; ?></span></p>
-            </div>
-
-
-        <form action="" method="POST" class="flex items-center gap-14 justify-start ">
-        <input type="hidden" name="appointment_id" value=<?= $reservation['idReservation']?>>
-        <button class=" px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" type='submit' name="approve" >
-          Approve Appointment
-        </button>
-        <button class=" ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" type='submit' name="cancel">
-          Cancel Appointment
-        </button>
-        </form>
+      <div class="w-1/2  mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-5">
+                    <div class="p-8 flex items-center justify-center gap-10 ">
+                        <div class="pr-4">
+                            <p class="text-4xl font-bold"><?php echo  $dates['day']; ?></p>
+                        </div>
+                        <div class="flex flex-col items-center text-center">
+                            <p class=" font-serif font-extrabold uppercase tracking-wide text-sm text-indigo-500 "><?php echo $dates['month'] . ' , ' . $dates['year']; ?></p>
+                            <p class=" font-serif font-extrabold mt-2 text-gray-500 text-sm center"><?php echo ' from : ' . $dates['startTime']; ?></p>
+                            <p class=" font-serif font-extrabold mt-2 text-gray-500 text-sm center"><?php echo ' to : ' . $dates['endTime']; ?></p>
+                            <p class=" font-serif font-extrabold mt-2 text-gray-500">WeekDay: <?php echo htmlspecialchars($dates['dayOfWeek']); ?></p>
+                            <p class="font-serif font-extrabold <?php echo "mt-2 text-gray-500" ?>"><?php echo "Status: ". $reservation['status']; ?></p>
+                        </div> 
+                        <form action="" method="POST" class="flex items-center gap-14 justify-start  flex-col">
+                        <input type="hidden" name="appointment_id" value=<?= $reservation['idReservation']?>>
+                        <button class="w-full px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" type='submit' name="approve" class="w-full" >
+                          Approve Appointment
+                        </button>
+                        <button class="w-full  px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" type='submit' name="cancel"  class="w-full">
+                          Cancel Appointment
+                        </button>
+                        </form>                     
+                    </div>
       </div>
   <?php endforeach; ?>
   </div>

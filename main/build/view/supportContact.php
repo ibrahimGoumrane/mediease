@@ -3,8 +3,8 @@
     session_start();
     function retrieveMessages() {
         // Assuming these are already sanitized and safe to use in SQL queries
-        $email = $_SESSION['Email'];
-        $devEmail = $_SESSION['devEmail'];
+        $email = $_SESSION['email'];
+        $devEmail = 'mizoxrizox@gmail.com';
     
         $conn = establishConn();
         $sql = "SELECT * FROM ContactUs WHERE email = :email or (User_mail = :email and email = :devEmail) ORDER BY created_at";
@@ -15,8 +15,6 @@
         $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $messages;
     }
-    
-
 ?>
 
 <!DOCTYPE html>
@@ -54,12 +52,10 @@
                         </span>
                     </p > 
                 <?php 
-                if(isset($_SESSION['devEmail'])){
                     $values = retrieveMessages();
-                }
                 if (isset($values)) {
                     foreach ($values as $value) {
-                        if ($value['email'] != $_SESSION['Email'] ) {
+                        if ($value['email'] != $_SESSION['email'] ) {
                             echo '<p class="text-left w-100 flex justify-left items-center gap-x-3 my-3" id="support"> 
                                     <span id="icon">
                                     <i class="bx bx-support bg-black rounded-full text-light-white p-2"></i>
