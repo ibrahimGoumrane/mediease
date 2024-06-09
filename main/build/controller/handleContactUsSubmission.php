@@ -1,18 +1,18 @@
 <?php
 include '../model/establishConn.php';
 session_start();
-$_SESSION['name'] = 'John Doe';
-$_SESSION['Email'] = 'john.doe@example.com';
-$_SESSION['PhoneNumber'] = '1234567890';
-$_SESSION['devEmail'] ='adminadmin@gmail.com';
+
+
 function insertContactUs($name, $email, $phone, $message) {
     $conn = establishConn();
-    $sql = "INSERT INTO ContactUs (name, email, phone_number, message ) VALUES (:name, :email, :phone, :message)";
+    $sql = "INSERT INTO ContactUs (name, email, phone_number, message , User_mail ) VALUES (:name, :email, :phone, :message , :devEmail)";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':phone', $phone);
     $stmt->bindParam(':message', $message);
+    $devEmail = 'mizoxrizox@gmail.com';
+    $stmt->bindParam(':devEmail',$devEmail);
     $stmt->execute();
 }
 
@@ -24,9 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = htmlspecialchars($_POST['Message']);
     }
     else{
-        $name = htmlspecialchars($_SESSION['name']);
-        $email = htmlspecialchars($_SESSION['Email']);
-        $phone = htmlspecialchars($_SESSION['PhoneNumber']);
+        $name = htmlspecialchars($_SESSION['full_name']);
+        $email = htmlspecialchars($_SESSION['email']);
+        $phone = htmlspecialchars($_SESSION['phone_number']);
         $message = htmlspecialchars($_POST['Message']);
     }
         try {
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 insertContactUs($name, $email, $phone, $message);
             }
                 header("Location: ../view/supportContact.php");
-                exit; // Make sure to exit after the redirection 
+                exit; 
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }

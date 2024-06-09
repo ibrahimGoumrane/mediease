@@ -58,7 +58,7 @@ $reservations = Reservation::getAllReservation($_SESSION['user_id']);
                             <div class="details hidden"><p class="mt-2 text-gray-500">Birthdate: <?php echo htmlspecialchars($reservation['date_of_birth']); ?></p>
                             <p class="mt-2 text-gray-500">Gender: <?php echo htmlspecialchars($reservation['gender']); ?></p>
                             <p class="mt-2 text-gray-500">Phone number: <?php echo htmlspecialchars($reservation['phone_number']); ?></p>
-                            <p class="mt-2 text-gray-500">Medical history: <?php echo htmlspecialchars($reservation['medical_history']); ?></p>
+                            <p class="mt-2 text-gray-500">Medical history: <?php echo $reservation['medical_history'] !=='' ? htmlspecialchars($reservation['medical_history']) : 'no Data found '  ; ?></p>
                             </div><button class="mt-5 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 show-details">
                                     View Details
                                 </button>
