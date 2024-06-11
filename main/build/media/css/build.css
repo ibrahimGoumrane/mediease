@@ -1371,6 +1371,10 @@ input:checked + .toggle-bg {
   margin-top: 2rem;
 }
 
+.mt-96 {
+  margin-top: 24rem;
+}
+
 .mt-auto {
   margin-top: auto;
 }
@@ -1431,6 +1435,10 @@ input:checked + .toggle-bg {
   height: 3.5rem;
 }
 
+.h-20 {
+  height: 5rem;
+}
+
 .h-28 {
   height: 7rem;
 }
@@ -1441,10 +1449,6 @@ input:checked + .toggle-bg {
 
 .h-3\.5 {
   height: 0.875rem;
-}
-
-.h-3\/4 {
-  height: 75%;
 }
 
 .h-4 {
@@ -1710,6 +1714,18 @@ input:checked + .toggle-bg {
 
 .rotate-45 {
   --tw-rotate: 45deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.scale-50 {
+  --tw-scale-x: .5;
+  --tw-scale-y: .5;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.scale-150 {
+  --tw-scale-x: 1.5;
+  --tw-scale-y: 1.5;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -2722,6 +2738,11 @@ input:checked + .toggle-bg {
 .text-red-600 {
   --tw-text-opacity: 1;
   color: rgb(224 36 36 / var(--tw-text-opacity));
+}
+
+.text-red-700 {
+  --tw-text-opacity: 1;
+  color: rgb(200 30 30 / var(--tw-text-opacity));
 }
 
 .text-slate-400 {

@@ -30,13 +30,14 @@ try {
             $_SESSION['user_type'] = $data['user_type'];
             if(strcasecmp($_SESSION['user_type'], 'Patient') == 0){
                 $_SESSION['medical_history'] = isset($data["medical_history"]) ? $data["medical_history"] : null;
+                header("Location: ../view/findDoctor.php");
             }
             else{
                 $_SESSION['years_of_experience'] = isset($data["years_of_experience"]) ? $data["years_of_experience"] : null;
                 $_SESSION['specialization'] = isset($data["specialization"]) ? $data["specialization"] : null;
+                header("Location: ../view/manageReservation.php");
             }
 
-            header("Location: ../view/homePage.php");
             exit();
         } 
         else {

@@ -58,7 +58,7 @@ if ($showToast) {
     <script src="../media/js/headerJs.js" defer></script>
 </head>
 
-<body>
+<body class="bg-gradient-to-t from-green-300 via-green-100 to-green-50">
 <?= include_once './components/header.php' ?>
 
 <?php if ($showToast): ?>
@@ -99,12 +99,12 @@ else{
 
 <div  class="relative p-20 text-center min-h-screen mb-10">
     <h1 class="text-5xl font-extrabold mb-8">Manage Reservations</h1>
-    <h2 class=" capitalize text-2xl font-extrabold mb-5"> Good Morning  : <?php echo $_SESSION['full_name'] ; ?> </h2>
+    <h2 class=" capitalize text-2xl font-bold mb-5"> Welcome Back, <?php echo $_SESSION['full_name'] ; ?> </h2>
   
     <?php if ($noSchedule) : ?>
-    <h2 class="text-left font-extrabold text-2xl text-gray-700 mb-6 text-nowrap ml-25">
+    <h2 class="text-center font-bold text-2xl text-gray-700 mb-6 text-nowrap ml-25">
       <?php 
-          echo 'Data about your availability not found. to add your availability  <a href="./add_availability.php" class="ml-4 text-green-500   hover:underline">click here</a>';?>
+          echo 'Data about your availability not found. to add your availability <br><br> <a href="./add_availability.php" class="w-full text-black bg-green-300 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">click here</a>';?>
   <?php else : ?>
   <h2 class="">Your availability :  <?php echo $startDay . '-' . $endDay.' <br> from : '.$availability; ?></h2>
   <?php endif; ?>
@@ -114,7 +114,7 @@ else{
   $reservations = Reservation::getAllReservation($doctor_id);
   $rese = new Reservation();
   if (empty($reservations)) {
-    echo '<p class=" font-extrabold text-2xl text-gray-700 mb-6 text-nowrap ml-25">No reservations found.</p>';
+    echo '<br> <p class=" font-bold text-2xl text-red-700 mb-6 text-nowrap ml-25 mx-auto">No reservations found.</p>';
     exit;
   }
   $i = 2;
@@ -153,11 +153,11 @@ else{
                             <p class="text-4xl font-bold"><?php echo  $dates['day']; ?></p>
                         </div>
                         <div class="flex flex-col items-center text-center">
-                            <p class=" font-serif font-extrabold uppercase tracking-wide text-sm text-indigo-500 "><?php echo $dates['month'] . ' , ' . $dates['year']; ?></p>
-                            <p class=" font-serif font-extrabold mt-2 text-gray-500 text-sm center"><?php echo ' from : ' . $dates['startTime']; ?></p>
-                            <p class=" font-serif font-extrabold mt-2 text-gray-500 text-sm center"><?php echo ' to : ' . $dates['endTime']; ?></p>
-                            <p class=" font-serif font-extrabold mt-2 text-gray-500">WeekDay: <?php echo htmlspecialchars($dates['dayOfWeek']); ?></p>
-                            <p class="font-serif font-extrabold <?php echo "mt-2 text-gray-500" ?>"><?php echo "Status: ". $reservation['status']; ?></p>
+                            <p class=" uppercase tracking-wide text-sm text-indigo-500 "><?php echo $dates['month'] . ' , ' . $dates['year']; ?></p>
+                            <p class=" mt-2 text-gray-500 text-sm center"><?php echo ' from : ' . $dates['startTime']; ?></p>
+                            <p class=" mt-2 text-gray-500 text-sm center"><?php echo ' to : ' . $dates['endTime']; ?></p>
+                            <p class=" mt-2 text-gray-500">Weekday: <?php echo htmlspecialchars($dates['dayOfWeek']); ?></p>
+                            <p class="mt-2 text-gray-500"><?php echo "Status: ". $reservation['status']; ?></p>
                         </div> 
                         <form action="" method="POST" class="flex items-center gap-14 justify-start  flex-col">
                         <input type="hidden" name="appointment_id" value=<?= $reservation['idReservation']?>>
@@ -173,8 +173,6 @@ else{
   <?php endforeach; ?>
   </div>
 </div>
-
-<?= include_once './components/footer.php' ?>
-
+<?php include_once './components/footer.php' ;?>
 </body>
 </html>

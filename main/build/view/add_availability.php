@@ -7,9 +7,9 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../media/css/build.css">
 </head>
-<body>
+<body class = "bg-gradient-to-t from-green-300 via-green-100 to-green-50 min-h-screen">
 <?php include_once './components/header.php' ;?>
-<main class="w-3/4 mx-auto p-10 mt-10 mb-10">
+<main class="flex flex-col items-center min-h-screen text-center">
 
 <h2 class=" capitalize text-2xl font-extrabold mb-5 text-center"> add Your availability Doc  : <?php echo $_SESSION['full_name'] ; ?> </h2>
 <form class="w-1/4 mx-auto" action='../controller/handle_availability.php' method="POST">

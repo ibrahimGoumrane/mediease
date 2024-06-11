@@ -60,48 +60,6 @@ try {
         "CREATE INDEX idx_reservation_doctor_id ON Reservation (doctor_id)",
         "CREATE INDEX idx_reservation_visit_date ON Reservation (visit_date)",
     
-        "CREATE TABLE IF NOT EXISTS MedicalRecords (
-            idMedicalRecord INT AUTO_INCREMENT PRIMARY KEY,
-            patient_id INT,
-            doctor_id INT,
-            diagnosis TEXT,
-            visit_date DATETIME,
-            treatment TEXT,
-            notes TEXT,
-            FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE,
-            FOREIGN KEY (doctor_id) REFERENCES Doctor(id) ON DELETE CASCADE
-        )",
-    
-        "CREATE INDEX idx_medicalrecords_patient_id ON MedicalRecords (patient_id)",
-        "CREATE INDEX idx_medicalrecords_doctor_id ON MedicalRecords (doctor_id)",
-        "CREATE INDEX idx_medicalrecords_visit_date ON MedicalRecords (visit_date)",
-    
-        "CREATE TABLE IF NOT EXISTS Payment (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            patient_id INT,
-            amount DECIMAL(10, 2),
-            payment_date DATETIME,
-            payment_method VARCHAR(20),
-            status VARCHAR(20),
-            FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
-        )",
-    
-        "CREATE INDEX idx_payment_patient_id ON Payment (patient_id)",
-        "CREATE INDEX idx_payment_payment_date ON Payment (payment_date)",
-    
-        "CREATE TABLE IF NOT EXISTS MedicalSupply (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(40),
-            quantity INT,
-            supplier VARCHAR(40),
-            purchase_date DATE,
-            expire_date DATE
-        )",
-    
-        "CREATE INDEX idx_medicalsupply_name ON MedicalSupply (name)",
-        "CREATE INDEX idx_medicalsupply_supplier ON MedicalSupply (supplier)",
-        "CREATE INDEX idx_medicalsupply_purchase_date ON MedicalSupply (purchase_date)",
-        "CREATE INDEX idx_medicalsupply_expire_date ON MedicalSupply (expire_date)",
     
         "CREATE TABLE IF NOT EXISTS Schedule (
             id_schedule INT AUTO_INCREMENT PRIMARY KEY,
