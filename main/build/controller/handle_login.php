@@ -7,10 +7,6 @@ ini_set('display_errors', 1);
 include_once '../model/establishConn.php';
 include_once '../model/Person.php';
 
-$host = 'localhost';
-$dbname = 'medieaseDB';
-$username = 'root';
-$password = '';
 
 
 try {
